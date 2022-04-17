@@ -1,9 +1,11 @@
 - name: Remove Ubuntu Telemetry
+  become: true
   apt:
     name: ["gnome-initial-setup", "ubuntu-report", "popularity-contest"]
     state: absent
 
 - name: Remove Ubuntu Bloat
+  become: true
   apt:
     name:
       [
@@ -17,6 +19,7 @@
     state: absent
 
 - name: Installing Generic Apps
+  become: true
   apt:
     name: [
         "htop",
@@ -74,6 +77,7 @@
       ]
 
 - name: Installing i3 and its Dependencies
+  become: true
   apt:
     name:
       [
@@ -88,6 +92,7 @@
       ]
 
 - name: Installing Ranger and its Dependencies
+  become: true
   apt:
     name:
       [
@@ -108,33 +113,41 @@
       ]
 
 - name: Installing LaTex
+  become: true
   apt:
     name: ["texlive-latex-extra", "texlive-fonts-extra", "texlive-xetex"]
 
 - name: Installing Metadata Tools
+  become: true
   apt:
     name: ["mat2", "seahorse-nautilus", "nautilus-image-converter", "testdisk"]
 
 - name: Adding VeraCrypt PPA
+  become: true
   apt_repository:
     repo: ppa:unit193/encryption
 
 - name: Installing VeraCrypt
+  become: true
   apt: name=veracrypt
 
 - name: Adding Sound Switcher Indicator PPA
+  become: true
   apt_repository:
     repo: ppa:yktooo/ppa
 
 - name: Installing Sound Switcher Indicator
+  become: true
   apt: name=indicator-sound-switcher
 
 - name: Remove Vim
+  become: true
   apt:
     name: vim
     state: absent
 
 - name: Install Neovim
+  become: true
   apt:
     name: neovim
 
@@ -142,12 +155,15 @@
   shell: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 - name: Installing ZSH
+  become: true
   apt: name=zsh
 
 - name: Change Shell to ZSH
+  become: true
   shell: chsh -s $(which zsh)
 
 - name: Remove Ubuntu Snap Bloat
+  become: true
   snap:
     name: ["gnome-calculator", "gnome-logs", "firefox"]
     state: absent

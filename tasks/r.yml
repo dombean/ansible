@@ -1,4 +1,5 @@
 - name: R APT Key
+  become: true
   ansible.builtin.apt_key:
     keyserver: keyserver.ubuntu.com
     id: E298A3A825C0D65DFD57CBB651716619E084DAB9
@@ -8,6 +9,7 @@
   register: ubuntu_dist
 
 - name: R Repository
+  become: true
   apt_repository:
     repo: deb https://cloud.r-project.org/bin/linux/ubuntu {{ ubuntu_dist.stdout }}-cran40/
 

@@ -1,8 +1,10 @@
 - name: Brave APT Key
+  become: true
   apt_key:
     url: https://brave-browser-apt-release.s3.brave.com/brave-core.asc
 
 - name: Brave Repository
+  become: true
   apt_repository:
     repo: deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
 

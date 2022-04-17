@@ -1,9 +1,11 @@
 - name: Spotify APT Key
+  become: true
   ansible.builtin.apt_key:
     keyserver: keyserver.ubuntu.com
     id: 5E3C45D7B312C643
 
 - name: Spotify Repository
+  become: true
   apt_repository:
     repo: deb http://repository.spotify.com stable non-free
 

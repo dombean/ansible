@@ -1,9 +1,11 @@
 - name: Windscribe APT Key
+  become: true
   ansible.builtin.apt_key:
     keyserver: keyserver.ubuntu.com
     id: FDC247B7
 
 - name: Windscribe PPA Setting
+  become: true
   apt_repository:
     repo: deb https://repo.windscribe.com/ubuntu bionic main
 
