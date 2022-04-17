@@ -2,10 +2,10 @@
   get_url:
     url: https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
     dest: /tmp/install_miniconda.sh
-    mode: 0755
+    mode: 777
 
 - name: Install Miniconda
-  command: bash /tmp/install_miniconda.sh -b -p ~/.miniconda3
+  command: bash /tmp/install_miniconda.sh -b -p {{ ansible_env.HOME}}/.miniconda3
 
 - name: Remove Miniconda Installer
   file:

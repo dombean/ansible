@@ -1,11 +1,28 @@
 - hosts: localhost
   pre_tasks:
+    - name: Configure dpkg 1
+      command: sudo rm /var/lib/apt/lists/lock
+      become: true
+
+    - name: Configure dpkg 2
+      command: sudo rm /var/cache/apt/archives/lock
+      become: true
+
+    - name: Configure dpkg 3
+      command: sudo rm /var/lib/dpkg/lock
+      become: true
+
+    - name: Configure dpkg 4
+      command: sudo dpkg --configure -a
+      become: true
+
     - name: Update APT
       become: true
       apt:
         force_apt_get: true
         update_cache: true
         state: present
+
   tasks:
     - include: tasks/core_setup.yml
     - include: tasks/brave.yml
