@@ -20,6 +20,6 @@ fi
 
 cd ~/ansible_ubuntu_install
 
-ansible-playbook main.yml --ask-become-pass "$@"
+sudo ansible-playbook main.yml --ask-become-pass "$@"
 
-echo 'Log out and back in for shell changes to take effect'
+echo ""Log out and back in for shell changes to take effect"
