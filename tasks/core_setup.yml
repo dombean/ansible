@@ -1,0 +1,161 @@
+- name: Remove Ubuntu Telemetry
+  apt:
+    name: ["gnome-initial-setup", "ubuntu-report", "popularity-contest"]
+    state: absent
+
+- name: Remove Ubuntu Bloat
+  apt:
+    name:
+      [
+        "gnome-calculator",
+        "baobab",
+        "evince",
+        "eog",
+        "gnome-system-monitor",
+        "gnome-screenshot",
+      ]
+    state: absent
+
+- name: Installing Generic Apps
+  apt:
+    name: [
+        "htop",
+        "curl",
+        "scrot",
+        "bleachbit",
+        "gnome-tweaks",
+        "transmission-cli",
+        "transmission-gtk",
+        "mpv",
+        "feh",
+        "sxiv",
+        "gdebi",
+        "redshift",
+        "git",
+        "git-lfs",
+        "stow",
+        "compton",
+        "dunst",
+        "rxvt-unicode",
+        "zathura",
+        "lxappearance",
+        "gucharmap",
+        "python3-pip",
+        "gcolor3",
+        "exfat-fuse",
+        "exfat-utils",
+        "shotwell",
+        "blueman",
+        "nitrogen",
+        "libreoffice",
+        "libreoffice-style-breeze",
+        "hunspell-en-gb",
+        "flameshot",
+        "cheese",
+        "jq",
+        "keyutils",
+        "gnome-calendar",
+        "pdftk",
+        "nethogs",
+        "syncthing",
+        "qt5ct",
+        "stacer",
+        "thunderbird",
+        "torbrowser-launcher",
+        "virtualbox",
+        "arc-theme",
+        # JupyterLab Dependencies
+        "nodejs",
+        "npm",
+        "graphviz",
+        "libgraphviz-dev",
+        # Xiaomi Tools
+        "openjdk-11-jdk",
+      ]
+
+- name: Installing i3 and its Dependencies
+  apt:
+    name:
+      [
+        "i3",
+        "i3blocks",
+        "xautolock",
+        "j4-dmenu-desktop",
+        "arandr",
+        "rofi",
+        "playerctl",
+        "light",
+      ]
+
+- name: Installing Ranger and its Dependencies
+  apt:
+    name:
+      [
+        "ranger",
+        "odt2txt",
+        "xsel",
+        "rename",
+        "pwgen",
+        "atool",
+        "unrar",
+        "zip",
+        "unzip",
+        "p7zip-full",
+        "p7zip-rar",
+        "rar",
+        "highlight",
+        "trash-cli",
+      ]
+
+- name: Installing LaTex
+  apt:
+    name: ["texlive-latex-extra", "texlive-fonts-extra", "texlive-xetex"]
+
+- name: Installing Metadata Tools
+  apt:
+    name: ["mat2", "seahorse-nautilus", "nautilus-image-converter", "testdisk"]
+
+- name: Adding VeraCrypt PPA
+  apt_repository:
+    repo: ppa:unit193/encryption
+
+- name: Installing VeraCrypt
+  apt: name=veracrypt
+
+- name: Adding Sound Switcher Indicator PPA
+  apt_repository:
+    repo: ppa:yktooo/ppa
+
+- name: Installing Sound Switcher Indicator
+  apt: name=indicator-sound-switcher
+
+- name: Remove Vim
+  apt:
+    name: vim
+    state: absent
+
+- name: Install Neovim
+  apt:
+    name: neovim
+
+- name: Install Vim-Plug
+  shell: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+- name: Installing ZSH
+  apt: name=zsh
+
+- name: Change Shell to ZSH
+  shell: chsh -s $(which zsh)
+
+- name: Remove Ubuntu Snap Bloat
+  snap:
+    name: ["gnome-calculator", "gnome-logs"]
+    state: absent
+# - name: Install Ubuntu Snaps
+#   snap:
+#     name: ["bw"]
+# "bitwarden",
+# "ferdi",
+# "electronplayer",
+# "jdownloader2",
+# "standard-notes",
