@@ -4,9 +4,11 @@
     dest: /tmp/install_miniconda.sh
 
 - name: Install Miniconda
+  become: true
   shell: /tmp/install_miniconda.sh -b -p ~/.miniconda3
 
 - name: Remove Miniconda Installer
+  become: true
   file:
     state: absent
     path: /tmp/install_miniconda.sh
