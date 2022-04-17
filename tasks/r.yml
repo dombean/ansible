@@ -3,9 +3,13 @@
     keyserver: keyserver.ubuntu.com
     id: E298A3A825C0D65DFD57CBB651716619E084DAB9
 
+- name: Work Out The Ubuntu Distribution
+  command: lsb_release -sc
+  register: ubuntu_dist
+
 - name: R Repository
   apt_repository:
-    repo: deb https://cloud.r-project.org/bin/linux/ubuntu {{lsb_release -cs}}-cran40/
+    repo: deb https://cloud.r-project.org/bin/linux/ubuntu {{ ubuntu_dist.stdout }}-cran40/
 
 - name: R APT Installation
   become: true
@@ -40,11 +44,11 @@
       EOF
 
 - name: Check RStudio Latest Version
-  uri: url=http://download1.rstudio.org/current.ver  return_content=yes
+  shell: curl -s http://download1.rstudio.org/current.ver | sed "s/+/-/" | sed "s/.pro1//"
   register: rstudio_version
 
 - name: Download RStudio DEB
-  get_url: url=https://download1.rstudio.org/desktop/bionic/amd64/rstudio-{{ rstudio_version.content }}-amd64.deb dest=/tmp/rstudio.deb
+  get_url: url=https://download1.rstudio.org/desktop/bionic/amd64/rstudio-{{ rstudio_version.stdout }}-amd64.deb dest=/tmp/rstudio.deb
 
 - name: Install RStudio DEB Package
   become: true
