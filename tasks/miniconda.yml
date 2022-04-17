@@ -5,7 +5,7 @@
     mode: 0755
 
 - name: Install Miniconda
-  shell: /tmp/install_miniconda.sh -b -p ~/.miniconda3
+  command: bash /tmp/install_miniconda.sh -b -p ~/.miniconda3
 
 - name: Remove Miniconda Installer
   file:

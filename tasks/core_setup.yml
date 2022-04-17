@@ -149,7 +149,7 @@
 
 - name: Remove Ubuntu Snap Bloat
   snap:
-    name: ["gnome-calculator", "gnome-logs"]
+    name: ["gnome-calculator", "gnome-logs", "firefox"]
     state: absent
 # - name: Install Ubuntu Snaps
 #   snap:
