@@ -19,3 +19,4 @@
     - include: tasks/r.yml
     - include: tasks/desktop.yml
     - include: tasks/dotfiles.yml
+    - include: tasks/pcloud.yml
