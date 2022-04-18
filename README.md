@@ -15,3 +15,9 @@ docker build -t ansible-build -f Dockerfile . --no-cache
 ```
 docker run -it ansible-build
 ```
+
+# Notes
+
+Run setup.sh and then generate_ssh_github.sh
+
+

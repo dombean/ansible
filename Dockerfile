@@ -1,4 +1,5 @@
-FROM ubuntu:impish
+FROM ubuntu:impish AS base
+WORKDIR /usr/local/bin
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
 RUN apt-get update && \
@@ -12,7 +13,17 @@ RUN apt-get update && \
     apt-get clean autoclean && \
     apt-get autoremove --yes
 
-# Copy local code to the container image.
+FROM base AS custom
+RUN apt-get update && apt-get install sudo -y
+RUN adduser --disabled-password --gecos '' docker
+RUN adduser docker sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER docker
+WORKDIR /home/docker
+RUN chmod -R 755 /home/docker
+
+FROM custom
 COPY . ./
 
-CMD ["sh", "-c", "ansible-playbook main.yml"]
+CMD ["sh", "-c", "ansible-playbook main.yml --ask-vault-pass"]
+# CMD ["sh", "-c", "ansible-playbook main.yml"]

@@ -1,0 +1,27 @@
+- name: Installing Stow
+  become: true
+  apt: name=stow
+
+- name: Clone Dotfiles
+  ansible.builtin.git:
+    repo: "https://{{ghtoken}}:x-oauth-basic@github.com/dombean/dotfiles.git"
+    dest: "{{ lookup('env', 'HOME') }}/dotfiles"
+
+- name: Make Custom Home Folders
+  shell: cd $HOME && mkdir dox dwn dsk pix snd vid && rm $HOME/.config/user-dirs.dirs 2> /dev/null || true
+
+- name: Stow Dotfiles
+  shell:
+    cmd: |
+      cd $HOME/dotfiles
+      for file in ~/dotfiles/*; do
+        # Only run Stow on the directories in the dotfiles folder and not the individual files.
+        # Using 'basename' strips the filepath from the directory name. 
+        if [ -d ${file} ]; then
+          stow $(basename $file)
+          echo "$(basename $file) stowed."; 
+        fi
+      done
+
+- name: Remove Default Home Folders
+  shell: cd $HOME && rm -rf Desktop/ Documents/ Downloads/ Music/ Pictures/ Public/ Templates/ Videos/ 2> /dev/null || true

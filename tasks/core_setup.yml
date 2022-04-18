@@ -1,6 +1,6 @@
 - name: Wait for Sudo
-  become: yes
-  shell:  while sudo fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done;
+  become: true
+  shell: while sudo fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done;
 
 - name: Remove Ubuntu Telemetry
   become: true
@@ -19,6 +19,7 @@
         "eog",
         "gnome-system-monitor",
         "gnome-screenshot",
+        "nano",
       ]
     state: absent
 
