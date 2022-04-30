@@ -18,6 +18,6 @@ docker run -it ansible-build
 
 # Notes
 
-Run setup.sh and then generate_ssh_github.sh
+Run setup.sh and then generate_ssh_github.sh and then download_appimages.sh
 
 
