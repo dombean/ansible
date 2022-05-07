@@ -1,16 +1,12 @@
-- name: Windscribe APT Key
-  become: true
-  ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: FDC247B7
+- name: Download Windscribe DEB
+  get_url: url=https://assets.staticnetcontent.com/desktop/linux/windscribe-cli_1.4-51_amd64.deb dest=/tmp/windscribe.deb
 
-- name: Windscribe PPA Setting
-  become: true
-  apt_repository:
-    repo: deb https://repo.windscribe.com/ubuntu bionic main
-
-- name: Windscribe APT Installation
+- name: Install Windscribe DEB Package
   become: true
   apt:
-    update_cache: yes
-    name: windscribe-cli
+    deb: /tmp/windscribe.deb
+
+- name: Remove Windscribe DEB Package
+  file:
+    state: absent
+    path: /tmp/windscribe.deb
