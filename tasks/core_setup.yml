@@ -50,8 +50,6 @@
         "gucharmap",
         "python3-pip",
         "gcolor3",
-        "exfat-fuse",
-        "exfat-utils",
         "shotwell",
         "blueman",
         "nitrogen",
