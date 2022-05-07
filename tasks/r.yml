@@ -1,8 +1,6 @@
 - name: R APT Key
   become: true
-  ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: E298A3A825C0D65DFD57CBB651716619E084DAB9
+  shell: wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 
 - name: Work Out The Ubuntu Distribution
   command: lsb_release -sc
