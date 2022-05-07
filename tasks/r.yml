@@ -44,7 +44,7 @@
       EOF
 
 - name: Check RStudio Latest Version
-  shell: curl -s http://download1.rstudio.org/current.ver | sed "s/+/-/" | sed "s/.pro1//"
+  shell: curl -s http://download1.rstudio.org/current.ver | sed "s/+/-/" | sed "s/.pro[0-9]//"
   register: rstudio_version
 
 - name: Download RStudio DEB
