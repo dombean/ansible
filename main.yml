@@ -11,11 +11,10 @@
 
   tasks:
     - include: tasks/core_setup.yml
-    - include: tasks/brave.yml
-    - include: tasks/spotify.yml
     - include: tasks/vscode.yml
     - include: tasks/windscribe.yml
     - include: tasks/miniconda.yml
     - include: tasks/r.yml
     - include: tasks/desktop.yml
     - include: tasks/dotfiles.yml
+    - include: tasks/deb_get.yml
