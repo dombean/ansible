@@ -25,7 +25,7 @@ unzip pcloud.zip && rm pcloud.zip && chmod +x pcloud && mv pcloud pcloud.AppImag
 
 echo
 echo "Download Standard Notes AppImage"
-curl -s https://api.github.com/repos/standardnotes/desktop/releases/latest \
+curl -s https://api.github.com/repos/standardnotes/app/releases/latest \
 | grep "standard-notes-*.*linux-x86_64*.*AppImage" \
 | cut -d : -f 2,3 \
 | tr -d \" \
