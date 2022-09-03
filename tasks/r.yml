@@ -1,4 +1,4 @@
-- name: Installing Generic Apps
+- name: Installing Dependencies
   become: true
   apt:
     name: [
