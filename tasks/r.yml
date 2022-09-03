@@ -1,6 +1,14 @@
+- name: Installing Generic Apps
+  become: true
+  apt:
+    name: [
+        "wget",
+        "gpg"
+    ]
+
 - name: R APT Key
   become: true
-  shell: wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+  shell: wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
 
 - name: Work Out The Ubuntu Distribution
   command: lsb_release -sc
@@ -8,8 +16,7 @@
 
 - name: R Repository
   become: true
-  apt_repository:
-    repo: deb https://cloud.r-project.org/bin/linux/ubuntu {{ ubuntu_dist.stdout }}-cran40/
+  shell: echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu {{ ubuntu_dist.stdout }}-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
 - name: R APT Installation
   become: true
@@ -43,19 +50,19 @@
       q()
       EOF
 
-- name: Check RStudio Latest Version
-  shell: curl -s http://download1.rstudio.org/current.ver | sed "s/+/-/" | sed "s/.pro[0-9]//"
-  register: rstudio_version
-
-- name: Download RStudio DEB
-  get_url: url=https://download1.rstudio.org/desktop/jammy/amd64/rstudio-{{ rstudio_version.stdout }}-amd64.deb dest=/tmp/rstudio.deb
-
-- name: Install RStudio DEB Package
-  become: true
-  apt:
-    deb: /tmp/rstudio.deb
-
-- name: Remove RStudio DEB Package
-  file:
-    state: absent
-    path: /tmp/rstudio.deb
+      #- name: Check RStudio Latest Version
+      #  shell: curl -s http://download1.rstudio.org/current.ver | sed "s/+/-/" | sed "s/.pro[0-9]//"
+      #  register: rstudio_version
+      #
+      #- name: Download RStudio DEB
+      #  get_url: url=https://download1.rstudio.org/desktop/jammy/amd64/rstudio-{{ rstudio_version.stdout }}-amd64.deb dest=/tmp/rstudio.deb
+      #
+      #- name: Install RStudio DEB Package
+      #  become: true
+      #  apt:
+      #    deb: /tmp/rstudio.deb
+      #
+      #- name: Remove RStudio DEB Package
+      #  file:
+      #    state: absent
+      #    path: /tmp/rstudio.deb

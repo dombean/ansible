@@ -4,4 +4,4 @@
 
 - name: Install Software
   become: true
-  shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux exodus spotify-client brave-browser code 
+  shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux exodus spotify-client brave-browser code rstudio
