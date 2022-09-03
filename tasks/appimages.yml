@@ -27,36 +27,6 @@
     cmd: |
       cd $HOME/apps && unzip pcloud.zip && rm pcloud.zip && chmod +x pcloud && mv pcloud pcloud.AppImage
 
-- name: Download Standard Notes AppImage
-  shell:
-    cmd: |
-      cd $HOME/apps && \
-      curl -s https://api.github.com/repos/standardnotes/desktop/releases/latest \
-      | grep "standard-notes-*.*linux-x86_64*.*AppImage" \
-      | cut -d : -f 2,3 \
-      | tr -d \" \
-      | wget -qi -
-
-- name: Make Standard Notes AppImage Executable
-  shell:
-    cmd: |
-      cd $HOME/apps && chmod +x standard-notes*AppImage
-
-- name: Download Bitwarden AppImage
-  shell:
-    cmd: |
-      cd $HOME/apps && \
-      curl -s https://api.github.com/repos/bitwarden/desktop/releases/latest \
-      | grep "Bitwarden-*.*-x86_64*.*AppImage" \
-      | cut -d : -f 2,3 \
-      | tr -d \" \
-      | wget -qi -
-
-- name: Make Bitwarden AppImage Executable
-  shell:
-    cmd: |
-      cd $HOME/apps && chmod +x Bitwarden*AppImage
-
 - name: Download Bitwarden CLI
   shell:
     cmd: |
