@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+env:
+  VAULT_PASS: "${{ secrets.VAULT_PASS }}"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build & Test Dotfiles
+        run: |
+          docker build --build-arg VAULT_PASS=$VAULT_PASS -t ansible-build -f Dockerfile_GitHub .
+          docker run ansible-build
