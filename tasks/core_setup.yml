@@ -27,6 +27,7 @@
   become: true
   apt:
     name: [
+        "nmap",
         "htop",
         "curl",
         "scrot",
