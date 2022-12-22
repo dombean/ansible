@@ -15,6 +15,8 @@ RUN apt-get update && \
 
 FROM base AS custom
 RUN apt-get update && apt-get install sudo -y
+RUN apt-get install dialog apt-utils -y
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN adduser --disabled-password --gecos '' docker
 RUN adduser docker sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers

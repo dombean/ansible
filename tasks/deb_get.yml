@@ -4,4 +4,7 @@
 
 - name: Install Software
   become: true
-  shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux exodus spotify-client brave-browser code rstudio neovim mullvad-vpn
+  shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux exodus spotify-client brave-browser code neovim
+
+  # packages below currently broken with deb-get
+  # rstudio mullvad-vpn
