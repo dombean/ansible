@@ -126,24 +126,6 @@
   apt:
     name: ["mat2", "seahorse-nautilus", "nautilus-image-converter", "testdisk"]
 
-- name: Adding VeraCrypt PPA
-  become: true
-  apt_repository:
-    repo: ppa:unit193/encryption
-
-- name: Installing VeraCrypt
-  become: true
-  apt: name=veracrypt
-
-- name: Adding Sound Switcher Indicator PPA
-  become: true
-  apt_repository:
-    repo: ppa:yktooo/ppa
-
-- name: Installing Sound Switcher Indicator
-  become: true
-  apt: name=indicator-sound-switcher
-
 - name: Remove Vim
   become: true
   apt:
