@@ -4,4 +4,4 @@
 
 - name: Install Software
   become: true
-  shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux exodus spotify-client brave-browser code neovim onlyoffice-desktopeditors rstudio veracrypt indicator-sound-switcher mullvad-vpn
+  shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux exodus spotify-client brave-browser code neovim onlyoffice-desktopeditors rstudio veracrypt indicator-sound-switcher
