@@ -27,6 +27,8 @@
   become: true
   apt:
     name: [
+        "exa",
+        "bat",
         "nmap",
         "htop",
         "curl",
