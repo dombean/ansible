@@ -2,6 +2,6 @@
   become: true
   shell: curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
 
-    #- name: Install Software
-    #  become: true
-    #  shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux exodus spotify-client brave-browser code neovim onlyoffice-desktopeditors rstudio veracrypt indicator-sound-switcher
+- name: Install Software
+  become: true
+  shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux exodus spotify-client brave-browser code neovim onlyoffice-desktopeditors rstudio veracrypt indicator-sound-switcher 2>/dev/null || true
