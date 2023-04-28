@@ -27,6 +27,7 @@
   become: true
   apt:
     name: [
+        "solaar",
         "exa",
         "bat",
         "nmap",
