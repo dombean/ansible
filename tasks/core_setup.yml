@@ -81,6 +81,8 @@
         "libgraphviz-dev",
         # Xiaomi Tools
         "openjdk-11-jdk",
+        # pCloud App Image Dependency
+        "libfuse2"
       ]
 
 - name: Installing i3 and its Dependencies
