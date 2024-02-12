@@ -12,6 +12,8 @@ To set up my personal Ubuntu machine, follow these steps:
 2. Run `generate_ssh_github.sh` to generate an SSH key and add it to my GitHub account.
 3. Run `download_appimages.sh` to download and configure necessary AppImages.
 
+Note: Change GTK theme to `Arc-Dark` using `gnome-tweaks`.
+
 ## Local Testing with Docker
 
 I can test the Ansible playbook locally using Docker. This allows me to ensure that my playbook is working correctly before deploying it to my Ubuntu machine.
