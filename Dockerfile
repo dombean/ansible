@@ -1,4 +1,4 @@
-FROM ubuntu:jammy AS base
+FROM ubuntu:noble AS base
 WORKDIR /usr/local/bin
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
