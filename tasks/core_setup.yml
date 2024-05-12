@@ -28,7 +28,7 @@
   apt:
     name: [
         "solaar",
-        "exa",
+        "eza",
         "bat",
         "nmap",
         "htop",
@@ -79,10 +79,8 @@
         "npm",
         "graphviz",
         "libgraphviz-dev",
-        # Xiaomi Tools
-        "openjdk-11-jdk",
         # pCloud App Image Dependency
-        "libfuse2"
+        "libfuse2",
       ]
 
 - name: Installing i3 and its Dependencies
@@ -129,7 +127,7 @@
 - name: Installing Metadata Tools
   become: true
   apt:
-    name: ["mat2", "seahorse-nautilus", "nautilus-image-converter", "testdisk"]
+    name: ["mat2", "nautilus-image-converter", "testdisk"]
 
 - name: Remove Vim
   become: true
