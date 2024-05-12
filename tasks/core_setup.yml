@@ -28,6 +28,7 @@
   apt:
     name: [
         "solaar",
+        "wget",
         "eza",
         "bat",
         "nmap",
