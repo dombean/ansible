@@ -1,6 +1,29 @@
-- name: Install deb-get
+- name: Clone deb-get repository
   become: true
-  shell: curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
+  git:
+    repo: "https://github.com/wimpysworld/deb-get.git"
+    dest: "/tmp/deb-get"
+    clone: yes
+    force: yes
+
+- name: Reset repository (hard reset)
+  become: true
+  command:
+    cmd: git reset --hard
+    chdir: /tmp/deb-get/
+
+- name: Pull latest changes
+  become: true
+  git:
+    repo: "https://github.com/wimpysworld/deb-get.git"
+    dest: "/tmp/deb-get"
+    update: yes
+
+- name: Run make install
+  become: true
+  make:
+    chdir: /tmp/deb-get/docs/
+    target: install
 
 - name: Install Software
   become: true
