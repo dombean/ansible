@@ -28,6 +28,7 @@
   apt:
     name: [
         "solaar",
+        "gpa",
         "wget",
         "eza",
         "bat",
