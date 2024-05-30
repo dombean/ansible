@@ -97,7 +97,7 @@
         "arandr",
         "rofi",
         "playerctl",
-        "light",
+        "brightnessctl",
       ]
 
 - name: Installing Ranger and its Dependencies
