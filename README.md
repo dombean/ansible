@@ -2,9 +2,9 @@
 
 ![Tests](https://github.com/dombean/ansible/actions/workflows/main.yml/badge.svg)
 
-This repository contains an Ansible playbook for setting up my personal Ubuntu machine, 
+This repository contains an Ansible playbook for setting up my personal Ubuntu machine,
 complete with my preferred dotfiles. The playbook automates the process of setting up
-my machine, making it easy to get started with a fresh Ubuntu installation or to 
+my machine, making it easy to get started with a fresh Ubuntu installation or to
 reset an existing system.
 
 ## 🚀 Quick Start
@@ -17,9 +17,23 @@ To set up my personal Ubuntu machine, follow these steps:
 
 Note: Change GTK theme to `Arc-Dark` using `gnome-tweaks`.
 
+## 🍏 Mac Setup
+
+If I'm on a Mac, follow these steps:
+
+1. Run `setup_brew_mac.sh` to set up Homebrew and essential tools.
+2. Run `generate_ssh_github.sh` to generate an SSH key and add it to my GitHub account.
+3. Use GNU Stow to manage dotfiles:
+    ```bash
+    stow git -t $HOME/     # Apply git configuration
+    stow nvim -t $HOME/    # Apply nvim configuration
+    stow xre_zsh -t $HOME/ # Apply zsh configuration
+    ```
+4. Manually install Snap and Aliento applications.
+
 ## 🐳 Local Testing with Docker
 
-I can test the Ansible playbook locally using Docker. This allows me to ensure that 
+I can test the Ansible playbook locally using Docker. This allows me to ensure that
 my playbook is working correctly before deploying it to my Ubuntu machine.
 
 ### 🏗️ Building the Docker Image
@@ -44,7 +58,7 @@ Run the Docker container in interactive mode with this command:
 docker run -it ansible-build
 ```
 
-This will allow me to explore the container and verify that the Ansible 
+This will allow me to explore the container and verify that the Ansible
 playbook has been applied correctly.
 
 ## 📝 Ansible Usage Examples
@@ -57,7 +71,7 @@ To decrypt a file that has been encrypted with Ansible Vault, use the following 
 ansible-vault decrypt generate_ssh_github.sh
 ```
 
-You will be prompted for the vault password. After providing the correct password, 
+You will be prompted for the vault password. After providing the correct password,
 the file `generate_ssh_github.sh` will be decrypted.
 
 ## 🗂️ Repository Structure
@@ -70,7 +84,8 @@ the file `generate_ssh_github.sh` will be decrypted.
 - `README.md`: Documentation for the repository.
 - `Dockerfile`: Dockerfile for building a Docker image of the setup.
 - `secrets.yml`: Encrypted file containing sensitive information, managed with Ansible Vault.
+- `setup_brew_mac.sh`: Bash script to set up Homebrew and essential tools on macOS.
 
 ## 📝 Note
 
-This repository is tailored to my personal preferences and is not intended for general use. 
+This repository is tailored to my personal preferences and is not intended for general use.
