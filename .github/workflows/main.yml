@@ -8,7 +8,7 @@ env:
   VAULT_PASS: "${{ secrets.VAULT_PASS }}"
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
       - name: Build & Test Dotfiles
