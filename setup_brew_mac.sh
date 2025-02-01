@@ -30,6 +30,7 @@ brew install font-symbols-only-nerd-font          # Symbol font for terminal
 brew install --cask font-sauce-code-pro-nerd-font # Nerd font for coding
 brew install --cask font-arimo                    # Arimo font
 brew install --cask font-fira-code                # Fira Code font
+brew install stow                                 # GNU Stow for managing dotfiles
 
 # Install GPG and pinentry
 brew install pinentry-mac gpg2 gnupg # For secure encryption and signing
