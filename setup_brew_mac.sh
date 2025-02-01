@@ -51,9 +51,9 @@ brew install --cask whatsapp           # Messaging application
 brew install --cask proton-mail        # Proton Mail app
 brew install --cask zen-browser        # Zen web browser
 brew install --cask brave-browser      # Brave web browser
-brew install --cask rectangle          # Window management tool
 brew install --cask raycast            # Productivity launcher
 brew install --cask spotify            # Music streaming application
+brew install --cask amethyst           # Tiling window manager
 
 # Use GNU Stow to manage dotfiles
 stow git -t $HOME/     # Apply git configuration
