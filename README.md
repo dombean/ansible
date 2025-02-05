@@ -29,7 +29,7 @@ If I'm on a Mac, follow these steps:
     stow nvim -t $HOME/    # Apply nvim configuration
     stow xre_zsh -t $HOME/ # Apply zsh configuration
     ```
-4. Manually install Snap and Aliento applications.
+4. Manually install Aliento applications.
 
 ## 🐳 Local Testing with Docker
 
