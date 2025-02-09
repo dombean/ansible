@@ -86,6 +86,7 @@ the file `generate_ssh_github.sh` will be decrypted.
 - `Dockerfile`: Dockerfile for building a Docker image of the setup.
 - `secrets.yml`: Encrypted file containing sensitive information, managed with Ansible Vault.
 - `setup_brew_mac.sh`: Bash script to set up Homebrew and essential tools on macOS.
+- `mac_scripts`: Folder containing scripts for macOS.
 
 ## 📝 Note
 

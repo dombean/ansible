@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>Open Yazi</string>
+	<key>CFBundleExecutable</key>
+	<string>open_yazi.sh</string>
+	<key>CFBundleIconFile</key>
+	<string>yazi_icon.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.dominic.openyazi</string>
+	<key>CFBundleName</key>
+	<string>Open Yazi</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+</dict>
+</plist>
