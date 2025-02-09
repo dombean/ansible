@@ -44,7 +44,7 @@ brew install --cask miniconda          # Python environment manager
 brew install --cask veracrypt          # Disk encryption tool
 brew install --cask betterdisplay      # Display management tool
 brew install --cask latest             # App update checker
-brew install --cask iterm2             # Terminal emulator
+brew install --cask ghostty            # Terminal emulator
 brew install --cask vlc                # Media player
 brew install --cask visual-studio-code # Code editor
 brew install --cask whatsapp           # Messaging application
