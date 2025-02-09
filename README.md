@@ -21,7 +21,7 @@ Note: Change GTK theme to `Arc-Dark` using `gnome-tweaks`.
 
 If I'm on a Mac, follow these steps:
 
-1. Run `setup_brew_mac.sh` to set up Homebrew and essential tools.
+1. Run `mac_scripts/setup_brew_mac.sh` to set up Homebrew and essential tools.
 2. Run `generate_ssh_github.sh` to generate an SSH key and add it to my GitHub account.
 3. Use GNU Stow to manage dotfiles:
     ```bash
@@ -85,7 +85,7 @@ the file `generate_ssh_github.sh` will be decrypted.
 - `README.md`: Documentation for the repository.
 - `Dockerfile`: Dockerfile for building a Docker image of the setup.
 - `secrets.yml`: Encrypted file containing sensitive information, managed with Ansible Vault.
-- `setup_brew_mac.sh`: Bash script to set up Homebrew and essential tools on macOS.
+- `mac_scripts/setup_brew_mac.sh`: Bash script to set up Homebrew and essential tools on macOS.
 - `mac_scripts`: Folder containing scripts for macOS.
 
 ## 📝 Note
