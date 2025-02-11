@@ -37,23 +37,23 @@ brew install pinentry-mac gpg2 gnupg # For secure encryption and signing
 brew install --cask gpg-suite        # GUI tools for GPG management
 
 # Install GUI apps with Homebrew Cask
-brew install --cask alt-tab            # Window manager to switch between apps
-brew install --cask hiddenbar          # Menu bar organization
-brew install --cask devtoys            # Developer toolbox
-brew install --cask miniconda          # Python environment manager
-brew install --cask veracrypt          # Disk encryption tool
-brew install --cask betterdisplay      # Display management tool
-brew install --cask latest             # App update checker
-brew install --cask ghostty            # Terminal emulator
-brew install --cask vlc                # Media player
-brew install --cask visual-studio-code # Code editor
-brew install --cask whatsapp           # Messaging application
-brew install --cask proton-mail        # Proton Mail app
-brew install --cask zen-browser        # Zen web browser
-brew install --cask brave-browser      # Brave web browser
-brew install --cask raycast            # Productivity launcher
-brew install --cask spotify            # Music streaming application
-brew install --cask amethyst           # Tiling window manager
+brew install --cask alt-tab                   # Window manager to switch between apps
+brew install --cask hiddenbar                 # Menu bar organization
+brew install --cask devtoys                   # Developer toolbox
+brew install --cask miniconda                 # Python environment manager
+brew install --cask veracrypt                 # Disk encryption tool
+brew install --cask betterdisplay             # Display management tool
+brew install --cask latest                    # App update checker
+brew install --cask ghostty                   # Terminal emulator
+brew install --cask vlc                       # Media player
+brew install --cask visual-studio-code        # Code editor
+brew install --cask whatsapp                  # Messaging application
+brew install --cask proton-mail               # Proton Mail app
+brew install --cask zen-browser               # Zen web browser
+brew install --cask brave-browser             # Brave web browser
+brew install --cask raycast                   # Productivity launcher
+brew install --cask spotify                   # Music streaming application
+brew install --cask nikitabobko/tap/aerospace # Tiling window manager
 
 # Use GNU Stow to manage dotfiles
 stow git -t $HOME/     # Apply git configuration
