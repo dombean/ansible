@@ -13,6 +13,7 @@ brew install git                                  # Version control system
 brew install bitwarden-cli                        # Command-line tool for Bitwarden password manager
 brew install neovim                               # Modern Vim-based text editor
 brew install eza                                  # Enhanced ls command
+brew install bat                                  # A cat clone with syntax highlighting and Git integration
 brew install mpv                                  # Command-line media player
 brew install coreutils                            # GNU core utilities for macOS
 brew install wget                                 # Network downloader
