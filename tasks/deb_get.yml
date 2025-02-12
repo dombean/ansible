@@ -25,6 +25,10 @@
     chdir: /tmp/deb-get/docs/
     target: install
 
+- name: Update deb-get
+  become: false
+  shell: deb-get update 2>/dev/null || true
+
 - name: Install Software
   become: true
   shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux spotify-client brave-browser code rstudio veracrypt indicator-sound-switcher mullvad-vpn 2>/dev/null || true
