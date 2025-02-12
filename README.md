@@ -28,7 +28,8 @@ If I'm on a Mac, follow these steps:
     stow git -t $HOME/     # Apply git configuration
     stow nvim -t $HOME/    # Apply nvim configuration
     stow xre_zsh -t $HOME/ # Apply zsh configuration
-    stow ghostty -t $HOME/ # Apply zsh configuration
+    stow ghostty -t $HOME/ # Apply ghostty configuration
+    stow aerospace -t $HOME/ # Apply aerospace configuration
     ```
 4. Manually install Aliento applications.
 
