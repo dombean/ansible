@@ -2,10 +2,10 @@
 
 cd $HOME
 
-echo "Making apps Directory"
-mkdir apps
+echo "Making Applications Directory"
+mkdir Applications
 
-cd $HOME/apps
+cd $HOME/Applications
 
 echo
 echo "Download pCloud AppImage Zip"
