@@ -27,6 +27,7 @@
   become: true
   apt:
     name: [
+        "neovim",
         "solaar",
         "gpa",
         "wget",
