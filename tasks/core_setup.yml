@@ -28,6 +28,7 @@
   apt:
     name: [
         "neovim",
+        "fzf",
         "solaar",
         "gpa",
         "wget",
