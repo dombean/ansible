@@ -155,3 +155,7 @@
   snap:
     name: ["gnome-calculator", "gnome-logs"]
     state: absent
+
+- name: Install Ghostty
+  become: true
+  shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
