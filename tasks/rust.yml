@@ -1,0 +1,29 @@
+- name: Install Rust and Cargo
+  shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+  become: true
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
+
+- name: Ensure Cargo binaries are in PATH
+  lineinfile:
+    path: /etc/profile.d/rust.sh
+    line: 'export PATH="$HOME/.cargo/bin:$PATH"'
+    create: yes
+  become: true
+
+- name: Source rust environment (for current session)
+  shell: source ~/.cargo/env
+  become: true
+  when: ansible_env.HOME is defined
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
+
+- name: Install yazi-fm and yazi-cli
+  shell: cargo install --locked yazi-fm yazi-cli
+  become: true
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/yazi-fm"
