@@ -155,6 +155,9 @@
   snap:
     name: ["gnome-calculator", "gnome-logs"]
     state: absent
-- name: Install Ubuntu Snaps
-  snap:
-    name: ["icloud-notes"]
+
+- name: Install Ubuntu Snaps using Bash
+  become: true
+  command: snap install icloud-notes
+  args:
+    creates: /snap/bin/icloud-notes  # Prevents reinstallation if already installed
