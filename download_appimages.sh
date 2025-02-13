@@ -34,3 +34,8 @@ curl -s https://api.github.com/repos/bitwarden/cli/releases/latest \
 echo
 echo "Extract Bitwarden CLI"
 unzip bw.zip && rm bw.zip && chmod +x bw
+
+# Link Applications directory to /Applications
+echo
+echo "Creating symbolic link for Applications in /Applications"
+sudo ln -s $HOME/Applications /Applications
