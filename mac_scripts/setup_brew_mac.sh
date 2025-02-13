@@ -55,6 +55,7 @@ brew install --cask brave-browser             # Brave web browser
 brew install --cask raycast                   # Productivity launcher
 brew install --cask spotify                   # Music streaming application
 brew install --cask nikitabobko/tap/aerospace # Tiling window manager
+brew install --cask protonvpn                 # VPN client
 
 # Use GNU Stow to manage dotfiles
 stow git -t $HOME/     # Apply git configuration
