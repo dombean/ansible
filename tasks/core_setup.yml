@@ -155,11 +155,6 @@
   snap:
     name: ["gnome-calculator", "gnome-logs"]
     state: absent
-# - name: Install Ubuntu Snaps
-#   snap:
-#     name: ["bw"]
-# "bitwarden",
-# "ferdi",
-# "electronplayer",
-# "jdownloader2",
-# "standard-notes",
+- name: Install Ubuntu Snaps
+  snap:
+    name: ["icloud-notes"]
