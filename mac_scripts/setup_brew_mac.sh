@@ -32,6 +32,8 @@ brew install --cask font-sauce-code-pro-nerd-font # Nerd font for coding
 brew install --cask font-arimo                    # Arimo font
 brew install --cask font-fira-code                # Fira Code font
 brew install stow                                 # GNU Stow for managing dotfiles
+brew install openjdk                              # OpenJDK Java Development Kit
+brew install awscli                               # AWS Command Line Interface
 
 # Install GPG and pinentry
 brew install pinentry-mac gpg2 gnupg # For secure encryption and signing
