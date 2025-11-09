@@ -59,6 +59,9 @@ brew install --cask spotify                   # Music streaming application
 brew install --cask nikitabobko/tap/aerospace # Tiling window manager
 brew install --cask protonvpn                 # VPN client
 brew install --cask flux-app                  # Flux screen color temperature app
+brew install --cask mos                       # Smooth scrolling app
+brew install --cask proton-drive              # Proton Drive app
+brew install --cask displaylink               # DisplayLink app for external displays
 
 # Use GNU Stow to manage dotfiles
 stow git -t $HOME/     # Apply git configuration
