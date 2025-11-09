@@ -62,6 +62,9 @@ brew install --cask flux-app                  # Flux screen color temperature ap
 brew install --cask mos                       # Smooth scrolling app
 brew install --cask proton-drive              # Proton Drive app
 brew install --cask displaylink               # DisplayLink app for external displays
+brew install --cask orbstack                  # OrbStack for containers and Linux on macOS
+brew install --cask standard-notes            # Standard Notes app
+brew install --cask plex                      # Plex media server app
 
 # Use GNU Stow to manage dotfiles
 stow git -t $HOME/     # Apply git configuration
