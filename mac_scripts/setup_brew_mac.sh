@@ -34,6 +34,7 @@ brew install --cask font-fira-code                # Fira Code font
 brew install stow                                 # GNU Stow for managing dotfiles
 brew install openjdk                              # OpenJDK Java Development Kit
 brew install awscli                               # AWS Command Line Interface
+brew install mac-mouse-fix                        # Fix mouse acceleration issues on macOS
 
 # Install GPG and pinentry
 brew install pinentry-mac gpg2 gnupg # For secure encryption and signing
@@ -59,7 +60,6 @@ brew install --cask spotify                   # Music streaming application
 brew install --cask nikitabobko/tap/aerospace # Tiling window manager
 brew install --cask protonvpn                 # VPN client
 brew install --cask flux-app                  # Flux screen color temperature app
-brew install --cask mos                       # Smooth scrolling app
 brew install --cask proton-drive              # Proton Drive app
 brew install --cask displaylink               # DisplayLink app for external displays
 brew install --cask orbstack                  # OrbStack for containers and Linux on macOS
