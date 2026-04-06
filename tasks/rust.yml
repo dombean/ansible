@@ -13,7 +13,7 @@
     HOME: "{{ ansible_facts['env']['HOME'] }}"
 
 - name: Install yazi-fm and yazi-cli
-  shell: cargo install --locked yazi-fm yazi-cli
+  shell: cargo install --force yazi-build
   become: true
   environment:
     HOME: "{{ ansible_facts['env']['HOME'] }}"
