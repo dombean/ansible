@@ -34,7 +34,9 @@ brew install --cask font-fira-code                # Fira Code font
 brew install stow                                 # GNU Stow for managing dotfiles
 brew install openjdk                              # OpenJDK Java Development Kit
 brew install awscli                               # AWS Command Line Interface
-brew install mac-mouse-fix                        # Fix mouse acceleration issues on macOS
+brew install mac-mouse-fix                        # Mouse Tool for macOS for better mouse behaviour
+brew install ouch                                 # Multi-Format Archive Tool
+
 
 # Install GPG and pinentry
 brew install pinentry-mac gpg2 gnupg # For secure encryption and signing
