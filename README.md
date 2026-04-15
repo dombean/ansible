@@ -35,6 +35,15 @@ If I'm on a Mac, follow these steps:
 
 ### ⌨️ Keyboard Configuration
 
+**Switch keyboard layout to US (if using a US keyboard)**
+
+Use **US**, not **US International**. US International treats quote and apostrophe keys
+as dead keys (they underline and wait for a follow-up keystroke), which breaks normal typing.
+
+1. Go to **System Settings → Keyboard → Input Sources**
+2. Click **+**, search for **English**, and select **US**
+3. Click **Add**, then remove any other layouts (e.g. British, US International) using **−**
+
 **Fix Vim key-repeat (disable press-and-hold accent picker)**
 
 macOS intercepts held keys to show a diacritic popup, which breaks
