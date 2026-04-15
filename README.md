@@ -33,6 +33,29 @@ If I'm on a Mac, follow these steps:
     ```
 4. Manually install Aliento applications.
 
+### ⌨️ Keyboard Configuration
+
+**Fix Vim key-repeat (disable press-and-hold accent picker)**
+
+macOS intercepts held keys to show a diacritic popup, which breaks
+held `j`/`k` navigation in Vim. Disable it with:
+
+```bash
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+```
+
+Restart VSCode after running. To revert:
+
+```bash
+defaults delete NSGlobalDomain ApplePressAndHoldEnabled
+```
+
+**Key repeat speed**
+
+In **System Settings → Keyboard**, set:
+- **Key Repeat Rate** → Fast
+- **Delay Until Repeat** → Short
+
 ## 🐳 Local Testing with Docker
 
 I can test the Ansible playbook locally using Docker. This allows me to ensure that
