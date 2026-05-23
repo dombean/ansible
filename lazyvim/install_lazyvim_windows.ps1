@@ -74,7 +74,7 @@ if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
 }
 
 # Back up any existing Neovim configuration / data so nothing is lost.
-function Backup-IfExists {
+function Backup-Path {
     param([string]$Path)
     if (Test-Path $Path) {
         $backup = "$Path.bak.$Timestamp"
@@ -84,8 +84,8 @@ function Backup-IfExists {
 }
 
 Write-Host "==> Backing up existing Neovim config/data (if any)"
-Backup-IfExists -Path $NvimConfig
-Backup-IfExists -Path $NvimData
+Backup-Path -Path $NvimConfig
+Backup-Path -Path $NvimData
 
 Write-Host "==> Cloning the LazyVim starter"
 git clone https://github.com/LazyVim/starter $NvimConfig
