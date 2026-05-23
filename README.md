@@ -153,14 +153,20 @@ docker build -t ansible-build -f Dockerfile . --no-cache
 
 ### 🏃 Running the Docker Container
 
-Run the Docker container in interactive mode with this command:
+The image has an `ENTRYPOINT` of `entrypoint.sh`, so running it directly runs
+the Ansible playbook (prompting for the vault password since `VAULT_PASS` isn't
+set locally):
 
 ```bash
 docker run -it ansible-build
 ```
 
-This will allow me to explore the container and verify that the Ansible
-playbook has been applied correctly.
+To instead drop into a shell and explore the container -- e.g. to verify that
+the playbook applied correctly -- override the entrypoint:
+
+```bash
+docker run -it --entrypoint bash ansible-build
+```
 
 ## 🤖 Continuous Integration (CI)
 

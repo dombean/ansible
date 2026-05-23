@@ -8,11 +8,14 @@
     clone: yes
     force: yes
 
-- name: Run make install
+# install_bins installs the deb-get binary + shell completions. The full
+# `install` target also rebuilds the man page via pandoc, which isn't installed
+# here and isn't needed for an automated setup.
+- name: Install deb-get binary
   become: true
   make:
     chdir: /tmp/deb-get/docs/
-    target: install
+    target: install_bins
 
 - name: Update deb-get
   become: false
