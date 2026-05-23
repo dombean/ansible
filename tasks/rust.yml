@@ -4,8 +4,12 @@
   args:
     creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
 
+# DO NOT change `yazi-build` to `yazi-fm`/`yazi-cli`. The yazi maintainers
+# publish a dedicated `yazi-build` meta-crate, and building yazi-fm/yazi-cli
+# directly from crates.io panics by design ("must be built with
+# `cargo install --force yazi-build`"). Verified by CI failure 2026-05-23.
 - name: Install yazi
-  shell: cargo install --locked yazi-fm yazi-cli
+  shell: cargo install --force yazi-build
   args:
     creates: "{{ ansible_env.HOME }}/.cargo/bin/yazi"
   environment:
