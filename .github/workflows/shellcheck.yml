@@ -22,7 +22,7 @@ jobs:
     name: Lint shell scripts
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # shellcheck ships preinstalled on the ubuntu runner. generate_ssh_github.sh
       # is Ansible Vault ciphertext (not a real script) so it is excluded.

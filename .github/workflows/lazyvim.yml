@@ -16,7 +16,7 @@ jobs:
     name: Lint scripts
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: ShellCheck (mac installer)
         run: shellcheck lazyvim/install_lazyvim_mac.sh
@@ -36,7 +36,7 @@ jobs:
     name: Smoke test (macOS)
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Run the macOS installer
         run: bash lazyvim/install_lazyvim_mac.sh
@@ -64,7 +64,7 @@ jobs:
     name: Smoke test (Windows)
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Run the Windows installer
         shell: pwsh
