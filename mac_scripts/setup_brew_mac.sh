@@ -37,7 +37,6 @@ brew install awscli                               # AWS Command Line Interface
 brew install mac-mouse-fix                        # Mouse Tool for macOS for better mouse behaviour
 brew install ouch                                 # Multi-Format Archive Tool
 
-
 # Install GPG and pinentry
 brew install pinentry-mac gpg2 gnupg # For secure encryption and signing
 brew install --cask gpg-suite        # GUI tools for GPG management
@@ -55,7 +54,9 @@ brew install --cask vlc                       # Media player
 brew install --cask visual-studio-code        # Code editor
 brew install --cask whatsapp                  # Messaging application
 brew install --cask proton-mail               # Proton Mail app
-brew install --cask zen-browser               # Zen web browser
+brew install --cask blankie                   # Ambient sound mixer
+brew install --cask pika                      # Colour picker
+brew install --cask helium-browser            # Chromium-based web browser
 brew install --cask brave-browser             # Brave web browser
 brew install --cask raycast                   # Productivity launcher
 brew install --cask spotify                   # Music streaming application
@@ -67,6 +68,7 @@ brew install --cask displaylink               # DisplayLink app for external dis
 brew install --cask orbstack                  # OrbStack for containers and Linux on macOS
 brew install --cask standard-notes            # Standard Notes app
 brew install --cask plex                      # Plex media server app
+brew install --cask keka                      # File archiver for macOS
 
 # Use GNU Stow to manage dotfiles
 stow git -t $HOME/     # Apply git configuration
