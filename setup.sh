@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+# setup.sh
+#
+# Bootstrap script for a fresh Ubuntu machine. Installs Ansible (and git) from
+# the official PPA, clones this repository into ~/ansible_ubuntu_install (if not
+# already present), and runs the playbook with prompts for the become and vault
+# passwords. Any extra arguments are forwarded to ansible-playbook.
 
 # echo every command and exit if any command fails
 set -ex
@@ -18,7 +25,7 @@ else
   git clone https://github.com/dombean/ansible ~/ansible_ubuntu_install
 fi
 
-cd ~/ansible_ubuntu_install
+cd ~/ansible_ubuntu_install || exit 1
 
 ansible-playbook main.yml --ask-become-pass --ask-vault-pass "$@"
 

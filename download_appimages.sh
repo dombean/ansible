@@ -1,11 +1,18 @@
 #!/bin/bash
+#
+# download_appimages.sh
+#
+# Downloads and installs the AppImages/CLIs that aren't managed by the Ansible
+# playbook: the pCloud drive AppImage and the Bitwarden CLI. Both are fetched
+# into ~/Applications, made executable, and ~/Applications is symlinked to
+# /Applications so the apps are discoverable system-wide.
 
-cd $HOME
+cd "$HOME" || exit 1
 
 echo "Making Applications Directory"
-mkdir Applications
+mkdir -p Applications
 
-cd $HOME/Applications
+cd "$HOME/Applications" || exit 1
 
 echo
 echo "Download pCloud AppImage Zip"
@@ -38,4 +45,4 @@ unzip bw.zip && rm bw.zip && chmod +x bw
 # Link Applications directory to /Applications
 echo
 echo "Creating symbolic link for Applications in /Applications"
-sudo ln -s $HOME/Applications /Applications
+sudo ln -s "$HOME/Applications" /Applications

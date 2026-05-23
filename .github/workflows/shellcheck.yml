@@ -1,0 +1,37 @@
+name: ShellCheck
+
+on:
+  push:
+    paths:
+      - "setup.sh"
+      - "entrypoint.sh"
+      - "download_appimages.sh"
+      - "mac_scripts/**"
+      - ".github/workflows/shellcheck.yml"
+  pull_request:
+    paths:
+      - "setup.sh"
+      - "entrypoint.sh"
+      - "download_appimages.sh"
+      - "mac_scripts/**"
+      - ".github/workflows/shellcheck.yml"
+  workflow_dispatch:
+
+jobs:
+  shellcheck:
+    name: Lint shell scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # shellcheck ships preinstalled on the ubuntu runner. generate_ssh_github.sh
+      # is Ansible Vault ciphertext (not a real script) so it is excluded.
+      # The LazyVim shell script is linted by lazyvim.yml instead.
+      - name: Run ShellCheck
+        run: |
+          shellcheck --severity=warning \
+            setup.sh \
+            entrypoint.sh \
+            download_appimages.sh \
+            mac_scripts/setup_brew_mac.sh \
+            "mac_scripts/open_yazi.app/Contents/MacOS/open_yazi.sh"

@@ -1,6 +1,7 @@
 # 🖥️ Personal Ubuntu Machine Setup with Ansible and Dotfiles
 
-![Tests](https://github.com/dombean/ansible/actions/workflows/main.yml/badge.svg)
+![CI](https://github.com/dombean/ansible/actions/workflows/ci.yml/badge.svg)
+![ShellCheck](https://github.com/dombean/ansible/actions/workflows/shellcheck.yml/badge.svg)
 ![LazyVim Scripts](https://github.com/dombean/ansible/actions/workflows/lazyvim.yml/badge.svg)
 
 This repository contains an Ansible playbook for setting up my personal Ubuntu machine,
@@ -163,7 +164,7 @@ playbook has been applied correctly.
 
 ## 🤖 Continuous Integration (CI)
 
-The `.github/workflows/main.yml` workflow is the CI gate for the Ansible setup.
+The `.github/workflows/ci.yml` workflow is the CI gate for the Ansible setup.
 It runs the same Docker-based test as above, but automatically in GitHub
 Actions, so a broken playbook is caught before it ever reaches a real machine.
 
@@ -185,6 +186,20 @@ Docker build from running on changes that can't affect it.
 
 > The `VAULT_PASS` secret must be configured in the repository's
 > **Settings → Secrets and variables → Actions** for the build to succeed.
+
+### 🐚 ShellCheck
+
+The `.github/workflows/shellcheck.yml` workflow lints the repository's shell
+scripts (`setup.sh`, `entrypoint.sh`, `download_appimages.sh`, and the
+`mac_scripts/` scripts) with `shellcheck --severity=warning`. It runs whenever
+one of those scripts changes. The LazyVim shell script is linted separately by
+`lazyvim.yml`, and the Vault-encrypted `generate_ssh_github.sh` is skipped.
+
+### 🤖 Dependabot
+
+`.github/dependabot.yml` enables weekly Dependabot updates for the
+`github-actions` ecosystem, so the action versions used across these workflows
+(e.g. `actions/checkout`) stay current automatically.
 
 ## 📝 Ansible Usage Examples
 
@@ -216,7 +231,10 @@ the file `generate_ssh_github.sh` will be decrypted.
 - `lazyvim/install_lazyvim_windows.ps1`: Installs Neovim + LazyVim + customisations on Windows via winget.
 - `lazyvim/nvim/lua/plugins/`: Custom LazyVim plugin specs copied into the Neovim config.
 - `lazyvim/keymaps-snippet.lua`: Auto-centring cursor keymaps appended to `keymaps.lua`.
+- `.github/workflows/ci.yml`: CI that builds the Docker image and runs the Ansible playbook end to end.
+- `.github/workflows/shellcheck.yml`: CI that lints the repository's shell scripts with ShellCheck.
 - `.github/workflows/lazyvim.yml`: CI that lints and smoke-tests the LazyVim installers.
+- `.github/dependabot.yml`: Weekly Dependabot updates for GitHub Actions versions.
 
 ## 📝 Note
 
