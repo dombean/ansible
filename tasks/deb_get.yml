@@ -1,3 +1,5 @@
+# force: yes discards local changes and the git module updates to the latest
+# default-branch commit on re-run, so a separate reset/pull is unnecessary.
 - name: Clone deb-get repository
   become: true
   git:
@@ -5,19 +7,6 @@
     dest: "/tmp/deb-get"
     clone: yes
     force: yes
-
-- name: Reset repository (hard reset)
-  become: true
-  command:
-    cmd: git reset --hard
-    chdir: /tmp/deb-get/
-
-- name: Pull latest changes
-  become: true
-  git:
-    repo: "https://github.com/wimpysworld/deb-get.git"
-    dest: "/tmp/deb-get"
-    update: yes
 
 - name: Run make install
   become: true
@@ -31,4 +20,4 @@
 
 - name: Install Software
   become: true
-  shell: sudo deb-get install standard-notes bitwarden whatsapp-for-linux spotify-client brave-browser code rstudio veracrypt indicator-sound-switcher protonvpn 2>/dev/null || true
+  shell: deb-get install standard-notes bitwarden whatsapp-for-linux spotify-client brave-browser code rstudio veracrypt indicator-sound-switcher protonvpn 2>/dev/null || true

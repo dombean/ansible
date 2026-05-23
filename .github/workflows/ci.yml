@@ -18,5 +18,5 @@ jobs:
       - uses: actions/checkout@v6
       - name: Build & Test Dotfiles
         run: |
-          docker build --build-arg VAULT_PASS=$VAULT_PASS -t ansible-build -f Dockerfile_GitHub .
+          docker build --build-arg VAULT_PASS=$VAULT_PASS -t ansible-build -f Dockerfile .
           docker run ansible-build

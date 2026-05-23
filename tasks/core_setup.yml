@@ -148,7 +148,9 @@
 
 - name: Change Shell to ZSH
   become: true
-  shell: chsh -s $(which zsh)
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/zsh
 
 - name: Remove Ubuntu Snap Bloat
   become: true

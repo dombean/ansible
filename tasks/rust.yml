@@ -1,27 +1,19 @@
+# Installed as the invoking user (no become) so ~/.cargo is owned by them.
 - name: Install Rust and Cargo
   shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   args:
-    creates: "{{ ansible_facts['env']['HOME'] }}/.cargo/bin/cargo"
-  become: true
-  environment:
-    HOME: "{{ ansible_facts['env']['HOME'] }}"
-
-- name: Ensure Cargo is in PATH for current session
-  shell: . ~/.cargo/env
-  become: true
-  environment:
-    HOME: "{{ ansible_facts['env']['HOME'] }}"
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
 
 - name: Install yazi
-  shell: cargo install --force yazi-build
-  become: true
+  shell: cargo install --locked yazi-fm yazi-cli
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/yazi"
   environment:
-    HOME: "{{ ansible_facts['env']['HOME'] }}"
-    PATH: "{{ ansible_facts['env']['HOME'] }}/.cargo/bin:{{ ansible_facts['env']['PATH'] }}"
+    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
 
 - name: Install fd-find
   shell: cargo install fd-find
-  become: true
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/fd"
   environment:
-    HOME: "{{ ansible_facts['env']['HOME'] }}"
-    PATH: "{{ ansible_facts['env']['HOME'] }}/.cargo/bin:{{ ansible_facts['env']['PATH'] }}"
+    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"

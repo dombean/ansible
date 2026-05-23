@@ -2,17 +2,19 @@
 #
 # entrypoint.sh
 #
-# Docker container entrypoint used by the CI image. Reads the Ansible Vault
-# password from the VAULT_PASS environment variable, writes it to a temporary
-# password file, and runs the Ansible playbook against it. The temp file is
-# removed on exit so the secret never lingers in the container.
+# Docker container entrypoint. If the VAULT_PASS environment variable is set
+# (e.g. in CI), it is written to a temporary password file and the Ansible
+# playbook runs non-interactively; the temp file is removed on exit so the
+# secret never lingers in the container. Otherwise the playbook prompts for the
+# vault password interactively (handy for local `docker run -it`).
 
 set -eu
 
-# Write the vault password to a temp file and remove it on exit so the
-# secret never lingers in the container filesystem.
-VAULT_FILE="$(mktemp)"
-trap 'rm -f "$VAULT_FILE"' EXIT
-
-printf '%s' "$VAULT_PASS" | tr -d ' ' > "$VAULT_FILE"
-ansible-playbook main.yml --vault-password-file="$VAULT_FILE"
+if [ -n "${VAULT_PASS:-}" ]; then
+  VAULT_FILE="$(mktemp)"
+  trap 'rm -f "$VAULT_FILE"' EXIT
+  printf '%s' "$VAULT_PASS" | tr -d ' ' > "$VAULT_FILE"
+  ansible-playbook main.yml --vault-password-file="$VAULT_FILE"
+else
+  ansible-playbook main.yml --ask-vault-pass
+fi

@@ -171,7 +171,7 @@ Actions, so a broken playbook is caught before it ever reaches a real machine.
 **What it does:**
 
 1. Checks out the repository on an `ubuntu-24.04` runner.
-2. Builds the Docker image from `Dockerfile_GitHub`, passing the
+2. Builds the Docker image from `Dockerfile`, passing the
    `VAULT_PASS` secret as a build argument (used to decrypt Ansible Vault files).
 3. Runs the container, which executes `entrypoint.sh` and applies the full
    Ansible playbook (`main.yml` + everything under `tasks/`).
@@ -221,8 +221,9 @@ the file `generate_ssh_github.sh` will be decrypted.
 - `setup.sh`: Bash script to install Ansible and its dependencies on Ubuntu.
 - `download_appimages.sh`: Script to download and configure AppImages.
 - `main.yml`: Main Ansible playbook that automates the setup of the Ubuntu machine.
+- `tasks/`: Ansible task files included by `main.yml` (core setup, miniconda, R, desktop, dotfiles, rust, deb-get).
 - `README.md`: Documentation for the repository.
-- `Dockerfile`: Dockerfile for building a Docker image of the setup.
+- `Dockerfile`: Dockerfile for building a Docker image of the setup (used locally and by CI).
 - `secrets.yml`: Encrypted file containing sensitive information, managed with Ansible Vault.
 - `mac_scripts/setup_brew_mac.sh`: Bash script to set up Homebrew and essential tools on macOS.
 - `mac_scripts`: Folder containing scripts for macOS.

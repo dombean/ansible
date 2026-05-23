@@ -3,6 +3,7 @@
   apt: name=stow
 
 - name: Clone Dotfiles
+  no_log: true
   ansible.builtin.git:
     repo: "https://{{ghtoken}}:x-oauth-basic@github.com/dombean/dotfiles.git"
     dest: "{{ lookup('env', 'HOME') }}/dotfiles"

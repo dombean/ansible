@@ -1,4 +1,10 @@
 FROM ubuntu:noble AS base
+
+# VAULT_PASS is optional: when provided (e.g. in CI) the playbook runs
+# non-interactively; otherwise the entrypoint prompts for the vault password.
+ARG VAULT_PASS=${VAULT_PASS}
+ENV VAULT_PASS=${VAULT_PASS}
+
 WORKDIR /usr/local/bin
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
@@ -27,4 +33,4 @@ RUN chmod -R 755 /home/docker
 FROM custom
 COPY . ./
 
-CMD ["sh", "-c", "ansible-playbook main.yml --ask-vault-pass"]
+ENTRYPOINT ["./entrypoint.sh"]

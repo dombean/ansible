@@ -8,7 +8,7 @@
 
 - name: R APT Key
   become: true
-  shell: wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
+  shell: wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | gpg --dearmor -o /usr/share/keyrings/r-project.gpg
 
 - name: Work Out The Ubuntu Distribution
   command: lsb_release -sc
@@ -16,7 +16,7 @@
 
 - name: R Repository
   become: true
-  shell: echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu {{ ubuntu_dist.stdout }}-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
+  shell: echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu {{ ubuntu_dist.stdout }}-cran40/" | tee /etc/apt/sources.list.d/r-project.list
 
 - name: R APT Installation
   become: true
@@ -40,7 +40,7 @@
 
 - name: R Change Package Repo
   become: true
-  shell: sed -i 's/https:\/\/cloud\.r-project\.org/https:\/\/packagemanager\.rstudio\.com\/all\/__linux__\/focal\/latest/g' /etc/R/Rprofile.site
+  shell: sed -i 's/https:\/\/cloud\.r-project\.org/https:\/\/packagemanager\.rstudio\.com\/all\/__linux__\/{{ ubuntu_dist.stdout }}\/latest/g' /etc/R/Rprofile.site
 
 - name: R Create Personal Library
   shell:
