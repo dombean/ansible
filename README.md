@@ -161,6 +161,31 @@ docker run -it ansible-build
 This will allow me to explore the container and verify that the Ansible
 playbook has been applied correctly.
 
+## 🤖 Continuous Integration (CI)
+
+The `.github/workflows/main.yml` workflow is the CI gate for the Ansible setup.
+It runs the same Docker-based test as above, but automatically in GitHub
+Actions, so a broken playbook is caught before it ever reaches a real machine.
+
+**What it does:**
+
+1. Checks out the repository on an `ubuntu-24.04` runner.
+2. Builds the Docker image from `Dockerfile_GitHub`, passing the
+   `VAULT_PASS` secret as a build argument (used to decrypt Ansible Vault files).
+3. Runs the container, which executes `entrypoint.sh` and applies the full
+   Ansible playbook (`main.yml` + everything under `tasks/`).
+
+**What it checks:** that the image builds and the playbook runs to completion
+without errors -- i.e. the dotfiles/tooling setup is still valid end to end.
+
+**When it runs:** on every push to `main`, *except* when the only changes are
+docs or platform-specific scripts (`README.md`, `lazyvim/**`, `mac_scripts/**`),
+plus a manual `workflow_dispatch` button. This keeps the (relatively slow)
+Docker build from running on changes that can't affect it.
+
+> The `VAULT_PASS` secret must be configured in the repository's
+> **Settings → Secrets and variables → Actions** for the build to succeed.
+
 ## 📝 Ansible Usage Examples
 
 ### Decrypting a file with Ansible Vault
