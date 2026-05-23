@@ -1,0 +1,102 @@
+name: LazyVim Scripts
+
+on:
+  push:
+    paths:
+      - "lazyvim/**"
+      - ".github/workflows/lazyvim.yml"
+  pull_request:
+    paths:
+      - "lazyvim/**"
+      - ".github/workflows/lazyvim.yml"
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Lint scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ShellCheck (mac installer)
+        run: shellcheck lazyvim/install_lazyvim_mac.sh
+
+      - name: PSScriptAnalyzer (windows installer)
+        shell: pwsh
+        run: |
+          Install-Module PSScriptAnalyzer -Force -Scope CurrentUser -SkipPublisherCheck
+          $results = Invoke-ScriptAnalyzer `
+            -Path lazyvim/install_lazyvim_windows.ps1 `
+            -Severity Error,Warning `
+            -ExcludeRule PSAvoidUsingWriteHost,PSUseShouldProcessForStateChangingFunctions
+          $results | Format-Table -AutoSize
+          if ($results) { throw "PSScriptAnalyzer reported $($results.Count) issue(s)." }
+
+  smoke-macos:
+    name: Smoke test (macOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run the macOS installer
+        run: bash lazyvim/install_lazyvim_mac.sh
+
+      - name: Sync plugins headless
+        run: nvim --headless "+Lazy! sync" "+qa"
+
+      - name: Verify customisations applied
+        run: |
+          set -euo pipefail
+          cfg="$HOME/.config/nvim"
+          data="$HOME/.local/share/nvim"
+          test -f "$cfg/lua/plugins/auto-save.lua"
+          test -f "$cfg/lua/plugins/noice.lua"
+          test -f "$cfg/lua/plugins/hardtime.lua"
+          test -f "$cfg/lua/plugins/surround.lua"
+          grep -q "custom: auto-centring cursor" "$cfg/lua/config/keymaps.lua"
+          # Custom plugins were actually cloned by :Lazy sync
+          test -d "$data/lazy/hardtime.nvim"
+          test -d "$data/lazy/nvim-surround"
+          test -d "$data/lazy/auto-save.nvim"
+          echo "macOS smoke test passed."
+
+  smoke-windows:
+    name: Smoke test (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run the Windows installer
+        shell: pwsh
+        run: ./lazyvim/install_lazyvim_windows.ps1
+
+      - name: Sync plugins headless
+        shell: pwsh
+        run: |
+          # Re-read PATH so winget-installed tools (nvim, clang) are visible.
+          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + `
+                      [System.Environment]::GetEnvironmentVariable("Path","User")
+          nvim --headless "+Lazy! sync" "+qa"
+
+      - name: Verify customisations applied
+        shell: pwsh
+        run: |
+          $cfg  = Join-Path $env:LOCALAPPDATA "nvim"
+          $data = Join-Path $env:LOCALAPPDATA "nvim-data"
+          $required = @(
+            (Join-Path $cfg  "lua\plugins\auto-save.lua"),
+            (Join-Path $cfg  "lua\plugins\noice.lua"),
+            (Join-Path $cfg  "lua\plugins\hardtime.lua"),
+            (Join-Path $cfg  "lua\plugins\surround.lua"),
+            (Join-Path $data "lazy\hardtime.nvim"),
+            (Join-Path $data "lazy\nvim-surround"),
+            (Join-Path $data "lazy\auto-save.nvim")
+          )
+          foreach ($p in $required) {
+            if (-not (Test-Path $p)) { throw "Missing expected path: $p" }
+          }
+          if (-not (Select-String -Path (Join-Path $cfg "lua\config\keymaps.lua") `
+                    -Pattern "custom: auto-centring cursor" -Quiet)) {
+            throw "Auto-centring keymaps not found in keymaps.lua"
+          }
+          Write-Host "Windows smoke test passed."

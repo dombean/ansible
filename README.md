@@ -1,6 +1,7 @@
 # 🖥️ Personal Ubuntu Machine Setup with Ansible and Dotfiles
 
 ![Tests](https://github.com/dombean/ansible/actions/workflows/main.yml/badge.svg)
+![LazyVim Scripts](https://github.com/dombean/ansible/actions/workflows/lazyvim.yml/badge.svg)
 
 This repository contains an Ansible playbook for setting up my personal Ubuntu machine,
 complete with my preferred dotfiles. The playbook automates the process of setting up
@@ -65,6 +66,71 @@ In **System Settings → Keyboard**, set:
 - **Key Repeat Rate** → Fast
 - **Delay Until Repeat** → Short
 
+## ⚡ LazyVim Setup (Neovim)
+
+The `lazyvim/` folder contains one-shot installers that set up
+[LazyVim](https://www.lazyvim.org/) along with my personal customisations on a
+fresh machine. Pick the script for my platform:
+
+| Platform | Script | Package manager |
+|---|---|---|
+| macOS | `lazyvim/install_lazyvim_mac.sh` | Homebrew |
+| Windows | `lazyvim/install_lazyvim_windows.ps1` | winget |
+
+**What each script does:**
+
+1. Installs Neovim and LazyVim's recommended dependencies (`git`, `ripgrep`,
+   `fd`, `fzf`, `lazygit`, a C compiler, and a Nerd Font).
+2. Backs up any existing Neovim config/state (timestamped `.bak.<date>`), so
+   re-running never clobbers an existing setup.
+3. Clones the [LazyVim starter](https://github.com/LazyVim/starter) into the
+   config dir (`~/.config/nvim` on macOS, `%LOCALAPPDATA%\nvim` on Windows) and
+   strips its `.git`.
+4. Copies my custom plugin specs from `lazyvim/nvim/lua/plugins/` into the
+   config.
+5. Appends my auto-centring cursor keymaps (`lazyvim/keymaps-snippet.lua`) to
+   `lua/config/keymaps.lua`, guarded by a marker comment so re-runs don't
+   duplicate them.
+
+**My customisations** (see each file in `lazyvim/nvim/lua/plugins/`):
+
+- **auto-save.nvim** -- saves on leaving Insert mode / text change (1s debounce).
+- **noice.nvim** -- disabled.
+- **hardtime.nvim** -- enforces better Vim motion habits.
+- **nvim-surround** -- add/change/delete surrounding brackets, quotes, tags.
+- **Auto-centring keymaps** -- `zz` after `<C-d>`/`<C-u>`, `n`/`N`, `G`, `*`/`#`.
+- **flash.nvim** -- built into LazyVim, no install needed (`s` to jump).
+
+### Running it
+
+**macOS:**
+
+```bash
+bash lazyvim/install_lazyvim_mac.sh
+```
+
+**Windows (PowerShell):**
+
+```powershell
+# If scripts are blocked, allow for the current session first:
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+./lazyvim/install_lazyvim_windows.ps1
+```
+
+After running: launch `nvim`, let plugins install, then run `:Lazy sync`. Set
+the terminal font to a Nerd Font so icons render.
+
+### Testing
+
+The `.github/workflows/lazyvim.yml` workflow tests both installers whenever
+files under `lazyvim/` change (and on manual dispatch):
+
+- **Lint** -- `shellcheck` on the macOS script and `PSScriptAnalyzer` on the
+  Windows script (runs on Linux, fast).
+- **Smoke test** -- actually runs each installer on macOS and Windows runners,
+  performs a headless `:Lazy sync`, and verifies the custom plugins were cloned
+  and the keymaps applied.
+
 ## 🐳 Local Testing with Docker
 
 I can test the Ansible playbook locally using Docker. This allows me to ensure that
@@ -120,6 +186,12 @@ the file `generate_ssh_github.sh` will be decrypted.
 - `secrets.yml`: Encrypted file containing sensitive information, managed with Ansible Vault.
 - `mac_scripts/setup_brew_mac.sh`: Bash script to set up Homebrew and essential tools on macOS.
 - `mac_scripts`: Folder containing scripts for macOS.
+- `lazyvim/`: Folder with LazyVim installers and shared Neovim config.
+- `lazyvim/install_lazyvim_mac.sh`: Installs Neovim + LazyVim + customisations on macOS via Homebrew.
+- `lazyvim/install_lazyvim_windows.ps1`: Installs Neovim + LazyVim + customisations on Windows via winget.
+- `lazyvim/nvim/lua/plugins/`: Custom LazyVim plugin specs copied into the Neovim config.
+- `lazyvim/keymaps-snippet.lua`: Auto-centring cursor keymaps appended to `keymaps.lua`.
+- `.github/workflows/lazyvim.yml`: CI that lints and smoke-tests the LazyVim installers.
 
 ## 📝 Note
 
