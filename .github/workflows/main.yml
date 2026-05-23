@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "README.md"
+      - "lazyvim/**"
+      - "mac_scripts/**"
+  workflow_dispatch:
 env:
   VAULT_PASS: "${{ secrets.VAULT_PASS }}"
 jobs:
