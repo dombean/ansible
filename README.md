@@ -78,17 +78,21 @@ fresh machine. Pick the script for my platform:
 | Platform | Script | Package manager |
 |---|---|---|
 | macOS | `lazyvim/install_lazyvim_mac.sh` | Homebrew |
+| Ubuntu | `lazyvim/install_lazyvim_ubuntu.sh` | apt-get |
 | Windows | `lazyvim/install_lazyvim_windows.ps1` | winget |
 
 **What each script does:**
 
 1. Installs Neovim and LazyVim's recommended dependencies (`git`, `ripgrep`,
-   `fd`, `fzf`, `lazygit`, a C compiler, and a Nerd Font).
+   `fd`, `fzf`, `lazygit`, a C compiler, and a Nerd Font). On Ubuntu, Neovim
+   comes from the official `neovim-ppa/unstable` PPA (apt's default is usually
+   too old for LazyVim); `lazygit` and the Nerd Font come from upstream releases
+   since they aren't in apt; and `fd` is exposed as a shim for apt's `fdfind`.
 2. Backs up any existing Neovim config/state (timestamped `.bak.<date>`), so
    re-running never clobbers an existing setup.
 3. Clones the [LazyVim starter](https://github.com/LazyVim/starter) into the
-   config dir (`~/.config/nvim` on macOS, `%LOCALAPPDATA%\nvim` on Windows) and
-   strips its `.git`.
+   config dir (`~/.config/nvim` on macOS/Ubuntu, `%LOCALAPPDATA%\nvim` on
+   Windows) and strips its `.git`.
 4. Copies my custom plugin specs from `lazyvim/nvim/lua/plugins/` into the
    config.
 5. Appends my auto-centring cursor keymaps (`lazyvim/keymaps-snippet.lua`) to
@@ -112,6 +116,12 @@ fresh machine. Pick the script for my platform:
 ./lazyvim/install_lazyvim_mac.sh
 ```
 
+**Ubuntu:**
+
+```bash
+./lazyvim/install_lazyvim_ubuntu.sh
+```
+
 **Windows (PowerShell):**
 
 ```powershell
@@ -128,11 +138,11 @@ the terminal font to a Nerd Font so icons render.
 The `.github/workflows/lazyvim.yml` workflow tests both installers whenever
 files under `lazyvim/` change (and on manual dispatch):
 
-- **Lint** -- `shellcheck` on the macOS script and `PSScriptAnalyzer` on the
-  Windows script (runs on Linux, fast).
-- **Smoke test** -- actually runs each installer on macOS and Windows runners,
-  performs a headless `:Lazy sync`, and verifies the custom plugins were cloned
-  and the keymaps applied.
+- **Lint** -- `shellcheck` on the macOS/Ubuntu scripts and `PSScriptAnalyzer` on
+  the Windows script (runs on Linux, fast).
+- **Smoke test** -- actually runs each installer on macOS, Ubuntu, and Windows
+  runners, performs a headless `:Lazy sync`, and verifies the custom plugins were
+  cloned and the keymaps applied.
 
 ## 🐳 Local Testing with Docker
 
@@ -237,6 +247,7 @@ the file `generate_ssh_github.sh` will be decrypted.
 - `mac_scripts`: Folder containing scripts for macOS.
 - `lazyvim/`: Folder with LazyVim installers and shared Neovim config.
 - `lazyvim/install_lazyvim_mac.sh`: Installs Neovim + LazyVim + customisations on macOS via Homebrew.
+- `lazyvim/install_lazyvim_ubuntu.sh`: Installs Neovim + LazyVim + customisations on Ubuntu via apt-get.
 - `lazyvim/install_lazyvim_windows.ps1`: Installs Neovim + LazyVim + customisations on Windows via winget.
 - `lazyvim/nvim/lua/plugins/`: Custom LazyVim plugin specs copied into the Neovim config.
 - `lazyvim/keymaps-snippet.lua`: Auto-centring cursor keymaps appended to `keymaps.lua`.

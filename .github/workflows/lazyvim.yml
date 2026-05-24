@@ -18,8 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: ShellCheck (mac installer)
-        run: shellcheck lazyvim/install_lazyvim_mac.sh
+      - name: ShellCheck (shell installers)
+        run: shellcheck lazyvim/install_lazyvim_mac.sh lazyvim/install_lazyvim_ubuntu.sh
 
       - name: PSScriptAnalyzer (windows installer)
         shell: pwsh
@@ -59,6 +59,34 @@ jobs:
           test -d "$data/lazy/nvim-surround"
           test -d "$data/lazy/auto-save.nvim"
           echo "macOS smoke test passed."
+
+  smoke-ubuntu:
+    name: Smoke test (Ubuntu)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run the Ubuntu installer
+        run: bash lazyvim/install_lazyvim_ubuntu.sh
+
+      - name: Sync plugins headless
+        run: nvim --headless "+Lazy! sync" "+qa"
+
+      - name: Verify customisations applied
+        run: |
+          set -euo pipefail
+          cfg="$HOME/.config/nvim"
+          data="$HOME/.local/share/nvim"
+          test -f "$cfg/lua/plugins/auto-save.lua"
+          test -f "$cfg/lua/plugins/noice.lua"
+          test -f "$cfg/lua/plugins/hardtime.lua"
+          test -f "$cfg/lua/plugins/surround.lua"
+          grep -q "custom: auto-centring cursor" "$cfg/lua/config/keymaps.lua"
+          # Custom plugins were actually cloned by :Lazy sync
+          test -d "$data/lazy/hardtime.nvim"
+          test -d "$data/lazy/nvim-surround"
+          test -d "$data/lazy/auto-save.nvim"
+          echo "Ubuntu smoke test passed."
 
   smoke-windows:
     name: Smoke test (Windows)
