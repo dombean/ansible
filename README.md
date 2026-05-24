@@ -1,13 +1,14 @@
-# 🖥️ Personal Ubuntu Machine Setup with Ansible and Dotfiles
+# 🖥️ Personal Ubuntu & macOS Machine Setup with Ansible, Homebrew, and Dotfiles
 
 ![CI](https://github.com/dombean/ansible/actions/workflows/ci.yml/badge.svg)
 ![ShellCheck](https://github.com/dombean/ansible/actions/workflows/shellcheck.yml/badge.svg)
 ![LazyVim Scripts](https://github.com/dombean/ansible/actions/workflows/lazyvim.yml/badge.svg)
 
-This repository contains an Ansible playbook for setting up my personal Ubuntu machine,
-complete with my preferred dotfiles. The playbook automates the process of setting up
-my machine, making it easy to get started with a fresh Ubuntu installation or to
-reset an existing system.
+This repository automates the setup of my personal machines, complete with my
+preferred dotfiles. On Ubuntu, an Ansible playbook installs my tooling and
+configuration; on macOS, a Homebrew script does the same. It also includes
+cross-platform LazyVim (Neovim) installers. This makes it easy to get started on
+a fresh install -- or reset an existing system -- on either platform.
 
 ## 🚀 Quick Start
 
