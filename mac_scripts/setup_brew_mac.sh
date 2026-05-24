@@ -15,6 +15,7 @@ brew install bitwarden-cli                        # Command-line tool for Bitwar
 brew install neovim                               # Modern Vim-based text editor
 brew install eza                                  # Enhanced ls command
 brew install bat                                  # A cat clone with syntax highlighting and Git integration
+brew install glow                                 # Markdown renderer for the terminal
 brew install mpv                                  # Command-line media player
 brew install coreutils                            # GNU core utilities for macOS
 brew install wget                                 # Network downloader
