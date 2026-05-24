@@ -28,12 +28,13 @@ If I'm on a Mac, follow these steps:
 3. Use GNU Stow to manage dotfiles:
     ```bash
     stow git -t $HOME/     # Apply git configuration
-    stow nvim -t $HOME/    # Apply nvim configuration
     stow xre_zsh -t $HOME/ # Apply zsh configuration
     stow ghostty -t $HOME/ # Apply ghostty configuration
     stow aerospace -t $HOME/ # Apply aerospace configuration
     ```
-4. Manually install Aliento applications.
+    > Note: Neovim is no longer managed via Stow. Use the LazyVim script
+    > installation in the [⚡ LazyVim Setup](#-lazyvim-setup-neovim) section below.
+4. Manually install [Aliento](https://inchman.gumroad.com/l/Aliento).
 
 ### ⌨️ Keyboard Configuration
 
