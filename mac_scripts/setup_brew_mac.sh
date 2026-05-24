@@ -10,6 +10,7 @@ brew update && brew upgrade
 
 # Install CLI tools
 brew install git                                  # Version control system
+brew install lazygit                              # Terminal UI for git
 brew install bitwarden-cli                        # Command-line tool for Bitwarden password manager
 brew install neovim                               # Modern Vim-based text editor
 brew install eza                                  # Enhanced ls command

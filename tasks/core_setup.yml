@@ -158,6 +158,29 @@
     name: ["gnome-calculator", "gnome-logs"]
     state: absent
 
+# lazygit isn't in the apt repos and has no official .deb, so install the latest
+# release binary from GitHub (the method lazygit recommends for Ubuntu).
+- name: Get the latest lazygit version
+  shell: >
+    curl -fsSL https://api.github.com/repos/jesseduffield/lazygit/releases/latest
+    | grep -Po '"tag_name": *"v\K[^"]*'
+  register: lazygit_version
+  changed_when: false
+
+- name: Install lazygit from the latest GitHub release
+  become: true
+  shell: |
+    set -euo pipefail
+    cd /tmp
+    arch="{{ 'arm64' if ansible_architecture == 'aarch64' else 'x86_64' }}"
+    curl -fsSLo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v{{ lazygit_version.stdout }}/lazygit_{{ lazygit_version.stdout }}_Linux_${arch}.tar.gz"
+    tar -xf lazygit.tar.gz lazygit
+    install lazygit /usr/local/bin/lazygit
+    rm -f lazygit lazygit.tar.gz
+  args:
+    creates: /usr/local/bin/lazygit
+    executable: /bin/bash
+
 - name: Install Ghostty
   become: true
   shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
