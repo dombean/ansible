@@ -109,7 +109,7 @@ fresh machine. Pick the script for my platform:
 **macOS:**
 
 ```bash
-bash lazyvim/install_lazyvim_mac.sh
+./lazyvim/install_lazyvim_mac.sh
 ```
 
 **Windows (PowerShell):**
