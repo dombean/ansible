@@ -54,6 +54,7 @@ brew install --cask latest                    # App update checker
 brew install --cask ghostty                   # Terminal emulator
 brew install --cask vlc                       # Media player
 brew install --cask visual-studio-code        # Code editor
+brew install --cask mactex                    # LaTeX distribution (TeX Live)
 brew install --cask whatsapp                  # Messaging application
 brew install --cask proton-mail               # Proton Mail app
 brew install --cask blankie                   # Ambient sound mixer

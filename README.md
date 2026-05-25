@@ -69,6 +69,30 @@ In **System Settings → Keyboard**, set:
 - **Key Repeat Rate** → Fast
 - **Delay Until Repeat** → Short
 
+### 📄 LaTeX & VimTeX
+
+VimTeX (in Neovim) compiles with `latexmk`, which ships with MacTeX/TeX Live but
+often isn't on the shell `PATH`. First locate it:
+
+```bash
+# Most reliable -- searches all the usual TeX locations
+find /Library/TeX /usr/local/texlive /usr/local/bin /opt/homebrew -name "latexmk" 2>/dev/null
+
+# Quick check if it's already on your shell PATH
+which latexmk
+
+# If `which` comes up empty, check if the TeX bin dir exists at all
+ls /Library/TeX/texbin/ 2>/dev/null | head -5
+```
+
+Symlinking the TeX bin into `/usr/local/bin` is the cleanest fix -- it also makes
+`pdflatex`, `bibtex`, etc. work in Neovim without any further config. Bulk-symlink
+the whole TeX bin (adjust the year/arch to match your install):
+
+```bash
+sudo ln -s /usr/local/texlive/2026/bin/universal-darwin/* /usr/local/bin/
+```
+
 ## ⚡ LazyVim Setup (Neovim)
 
 The `lazyvim/` folder contains one-shot installers that set up
