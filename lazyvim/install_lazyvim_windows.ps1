@@ -69,11 +69,11 @@ Install-WingetPackage -Id "BurntSushi.ripgrep.MSVC"  -CommandCheck "rg"
 Install-WingetPackage -Id "sharkdp.fd"               -CommandCheck "fd"
 Install-WingetPackage -Id "junegunn.fzf"             -CommandCheck "fzf"
 Install-WingetPackage -Id "JesseDuffield.lazygit"    -CommandCheck "lazygit"
-# C compiler for nvim-treesitter. zig is a self-contained toolchain that works
-# out of the box on Windows; clang-only installs often fail to link parsers
-# without the MSVC toolchain/Windows SDK. nvim-treesitter auto-detects "zig"
-# on PATH (it's in its default compiler list), so no extra config is needed.
-Install-WingetPackage -Id "zig.zig"                  -CommandCheck "zig"
+# C compiler (gcc) for nvim-treesitter. This is the exact package LazyVim's
+# own health check recommends; WinLibs is a portable MinGW-w64 toolchain that
+# winget exposes on PATH via its Links shim directory, so `gcc` is detected
+# without the MSVC toolchain/Windows SDK that a clang-only install needs.
+Install-WingetPackage -Id "BrechtSanders.WinLibs.POSIX.UCRT" -CommandCheck "gcc"
 # A Nerd Font for icons - id varies across winget versions, so treat as optional.
 Install-WingetPackage -Id "DEVCOM.JetBrainsMonoNerdFont" -Optional
 
