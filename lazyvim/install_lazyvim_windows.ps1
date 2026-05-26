@@ -10,7 +10,11 @@
 
 $ErrorActionPreference = "Stop"
 
-$ScriptDir   = Split-Path -Parent $MyInvocation.MyCommand.Definition
+# $PSScriptRoot is the reliable way to find the script's own directory in
+# PS 5.1+. $MyInvocation.MyCommand.Definition can resolve to an empty/relative
+# value depending on how the script is launched, which breaks the file copies.
+$ScriptDir   = $PSScriptRoot
+if (-not $ScriptDir) { $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path }
 $NvimConfig  = Join-Path $env:LOCALAPPDATA "nvim"
 $NvimData    = Join-Path $env:LOCALAPPDATA "nvim-data"
 $Timestamp   = Get-Date -Format "yyyyMMdd-HHmmss"
@@ -92,9 +96,13 @@ git clone https://github.com/LazyVim/starter $NvimConfig
 Remove-Item -Path (Join-Path $NvimConfig ".git") -Recurse -Force
 
 Write-Host "==> Copying custom plugin files"
+$PluginsSrc  = Join-Path $ScriptDir "nvim\lua\plugins"
+if (-not (Test-Path $PluginsSrc)) {
+    throw "Cannot find custom plugin source at '$PluginsSrc'. Run this script from inside the cloned repo so the 'nvim\lua\plugins' folder sits alongside it."
+}
 $PluginsDest = Join-Path $NvimConfig "lua\plugins"
 New-Item -ItemType Directory -Force -Path $PluginsDest | Out-Null
-Copy-Item -Path (Join-Path $ScriptDir "nvim\lua\plugins\*.lua") -Destination $PluginsDest
+Copy-Item -Path (Join-Path $PluginsSrc "*.lua") -Destination $PluginsDest
 
 Write-Host "==> Adding auto-centring cursor keymaps"
 $KeymapsFile = Join-Path $NvimConfig "lua\config\keymaps.lua"
