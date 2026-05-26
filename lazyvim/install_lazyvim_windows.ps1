@@ -69,8 +69,11 @@ Install-WingetPackage -Id "BurntSushi.ripgrep.MSVC"  -CommandCheck "rg"
 Install-WingetPackage -Id "sharkdp.fd"               -CommandCheck "fd"
 Install-WingetPackage -Id "junegunn.fzf"             -CommandCheck "fzf"
 Install-WingetPackage -Id "JesseDuffield.lazygit"    -CommandCheck "lazygit"
-# C compiler for nvim-treesitter (clang via LLVM).
-Install-WingetPackage -Id "LLVM.LLVM"                -CommandCheck "clang"
+# C compiler for nvim-treesitter. zig is a self-contained toolchain that works
+# out of the box on Windows; clang-only installs often fail to link parsers
+# without the MSVC toolchain/Windows SDK. nvim-treesitter auto-detects "zig"
+# on PATH (it's in its default compiler list), so no extra config is needed.
+Install-WingetPackage -Id "zig.zig"                  -CommandCheck "zig"
 # A Nerd Font for icons - id varies across winget versions, so treat as optional.
 Install-WingetPackage -Id "DEVCOM.JetBrainsMonoNerdFont" -Optional
 
