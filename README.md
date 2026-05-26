@@ -122,6 +122,10 @@ fresh machine. Pick the script for my platform:
 5. Appends my auto-centring cursor keymaps (`lazyvim/keymaps-snippet.lua`) to
    `lua/config/keymaps.lua`, guarded by a marker comment so re-runs don't
    duplicate them.
+6. **(Windows only)** Writes `lua/config/options.lua` so Neovim's built-in
+   terminal uses PowerShell 7 (`pwsh`) instead of the legacy `cmd.exe`/Windows
+   PowerShell, guarded by the same marker-comment pattern so re-runs don't
+   duplicate it.
 
 **My customisations** (see each file in `lazyvim/nvim/lua/plugins/`):
 
@@ -174,7 +178,8 @@ files under `lazyvim/` change (and on manual dispatch):
   the Windows script (runs on Linux, fast).
 - **Smoke test** -- actually runs each installer on macOS, Ubuntu, and Windows
   runners, performs a headless `:Lazy sync`, and verifies the custom plugins were
-  cloned and the keymaps applied.
+  cloned and the keymaps applied (the Windows run additionally checks that the
+  PowerShell 7 shell options were written to `options.lua`).
 
 ## 🐳 Local Testing with Docker
 

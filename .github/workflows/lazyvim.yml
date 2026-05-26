@@ -127,4 +127,8 @@ jobs:
                     -Pattern "custom: auto-centring cursor" -Quiet)) {
             throw "Auto-centring keymaps not found in keymaps.lua"
           }
+          if (-not (Select-String -Path (Join-Path $cfg "lua\config\options.lua") `
+                    -Pattern "Windows: use PowerShell 7" -Quiet)) {
+            throw "PowerShell shell options not found in options.lua"
+          }
           Write-Host "Windows smoke test passed."

@@ -134,6 +134,30 @@ if (Select-String -Path $KeymapsFile -Pattern "custom: auto-centring cursor" -Qu
     Add-Content -Path $KeymapsFile -Value $Snippet
 }
 
+Write-Host "==> Configuring PowerShell 7 as the built-in terminal shell (Windows)"
+$OptionsFile = Join-Path $NvimConfig "lua\config\options.lua"
+New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OptionsFile) | Out-Null
+if (-not (Test-Path $OptionsFile)) { New-Item -ItemType File -Path $OptionsFile | Out-Null }
+if (Select-String -Path $OptionsFile -Pattern "Windows: use PowerShell 7" -Quiet) {
+    Write-Host "    PowerShell shell options already present, skipping"
+} else {
+    # Single-quoted here-string: the contents are written verbatim, so Lua
+    # tokens like $_, %s and \" are not touched by PowerShell.
+    $OptionsSnippet = @'
+-- Windows: use PowerShell 7 (latest powershell) for the built-in terminal
+if vim.fn.has("win32") == 1 then
+  vim.opt.shell = "pwsh"
+  vim.opt.shellcmdflag = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+  vim.opt.shellredir = "2>&1 | %%{ \"$_\" } | Out-File %s; exit $LastExitCode"
+  vim.opt.shellpipe  = "2>&1 | %%{ \"$_\" } | Tee-Object %s; exit $LastExitCode"
+  vim.opt.shellquote = ""
+  vim.opt.shellxquote = ""
+end
+'@
+    Add-Content -Path $OptionsFile -Value ""
+    Add-Content -Path $OptionsFile -Value $OptionsSnippet
+}
+
 Write-Host @"
 
 ==> Done!
@@ -144,6 +168,7 @@ LazyVim is installed with your customisations:
   - hardtime.nvim
   - nvim-surround
   - auto-centring cursor keymaps
+  - PowerShell 7 as the built-in terminal shell (Windows)
 
 Next steps:
   1. Open a NEW terminal (so PATH updates take effect).
