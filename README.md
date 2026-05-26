@@ -134,8 +134,11 @@ fresh machine. Pick the script for my platform:
 - **snacks.nvim projects picker** -- points the projects picker at my dev
   folders. The path is resolved at runtime (no hardcoded absolute path): set
   the `NVIM_DEV_DIR` environment variable to override it, otherwise it defaults
-  to `~/Downloads/repos` on Windows, or `~/Documents/dev/repos` and
-  `~/Documents/repos` elsewhere. Missing directories are ignored.
+  to `~/Downloads/Repos` on Windows, or `~/Documents/dev/repos` and
+  `~/Documents/repos` elsewhere. Missing directories are ignored. Note: match
+  the directory's real casing -- the picker dedupes by exact path string, so on
+  Windows (case-insensitive lookups) a casing mismatch with the `recent` source
+  makes a repo show up twice.
 
 ### Running it
 

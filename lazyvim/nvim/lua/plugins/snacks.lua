@@ -12,7 +12,10 @@ return {
       if dev and dev ~= "" then
         dirs = { dev }
       elseif vim.fn.has("win32") == 1 then
-        dirs = { vim.fn.expand("~/Downloads/repos") }
+        -- Match the real directory casing exactly. Windows is case-insensitive
+        -- for lookups, but the picker dedupes projects by path string, so a
+        -- casing mismatch with the `recent` source shows the repo twice.
+        dirs = { vim.fn.expand("~/Downloads/Repos") }
       else
         dirs = {
           vim.fn.expand("~/Documents/dev/repos"),
