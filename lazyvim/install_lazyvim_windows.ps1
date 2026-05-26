@@ -18,6 +18,9 @@ if (-not $ScriptDir) { $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.P
 $NvimConfig  = Join-Path $env:LOCALAPPDATA "nvim"
 $NvimData    = Join-Path $env:LOCALAPPDATA "nvim-data"
 $Timestamp   = Get-Date -Format "yyyyMMdd-HHmmss"
+# When run as a standalone download (no repo alongside it), the script fetches
+# its custom files from here instead.
+$RepoRawBase = "https://raw.githubusercontent.com/dombean/ansible/main/lazyvim"
 
 function Update-SessionPath {
     # Pick up tools installed by winget without reopening the terminal.
@@ -96,13 +99,19 @@ git clone https://github.com/LazyVim/starter $NvimConfig
 Remove-Item -Path (Join-Path $NvimConfig ".git") -Recurse -Force
 
 Write-Host "==> Copying custom plugin files"
-$PluginsSrc  = Join-Path $ScriptDir "nvim\lua\plugins"
-if (-not (Test-Path $PluginsSrc)) {
-    throw "Cannot find custom plugin source at '$PluginsSrc'. Run this script from inside the cloned repo so the 'nvim\lua\plugins' folder sits alongside it."
-}
 $PluginsDest = Join-Path $NvimConfig "lua\plugins"
 New-Item -ItemType Directory -Force -Path $PluginsDest | Out-Null
-Copy-Item -Path (Join-Path $PluginsSrc "*.lua") -Destination $PluginsDest
+$PluginsSrc  = Join-Path $ScriptDir "nvim\lua\plugins"
+if (Test-Path (Join-Path $PluginsSrc "*.lua")) {
+    Copy-Item -Path (Join-Path $PluginsSrc "*.lua") -Destination $PluginsDest
+} else {
+    Write-Host "    local source not found, downloading from GitHub"
+    $PluginFiles = @("auto-save.lua", "hardtime.lua", "noice.lua", "surround.lua")
+    foreach ($file in $PluginFiles) {
+        Invoke-WebRequest -Uri "$RepoRawBase/nvim/lua/plugins/$file" `
+            -OutFile (Join-Path $PluginsDest $file) -UseBasicParsing
+    }
+}
 
 Write-Host "==> Adding auto-centring cursor keymaps"
 $KeymapsFile = Join-Path $NvimConfig "lua\config\keymaps.lua"
@@ -111,8 +120,15 @@ if (-not (Test-Path $KeymapsFile)) { New-Item -ItemType File -Path $KeymapsFile 
 if (Select-String -Path $KeymapsFile -Pattern "custom: auto-centring cursor" -Quiet) {
     Write-Host "    keymaps already present, skipping"
 } else {
+    $SnippetLocal = Join-Path $ScriptDir "keymaps-snippet.lua"
+    if (Test-Path $SnippetLocal) {
+        $Snippet = Get-Content -Path $SnippetLocal -Raw
+    } else {
+        Write-Host "    local snippet not found, downloading from GitHub"
+        $Snippet = (Invoke-WebRequest -Uri "$RepoRawBase/keymaps-snippet.lua" -UseBasicParsing).Content
+    }
     Add-Content -Path $KeymapsFile -Value ""
-    Get-Content -Path (Join-Path $ScriptDir "keymaps-snippet.lua") | Add-Content -Path $KeymapsFile
+    Add-Content -Path $KeymapsFile -Value $Snippet
 }
 
 Write-Host @"
