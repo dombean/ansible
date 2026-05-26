@@ -109,7 +109,7 @@ if (Test-Path (Join-Path $PluginsSrc "*.lua")) {
     Copy-Item -Path (Join-Path $PluginsSrc "*.lua") -Destination $PluginsDest
 } else {
     Write-Host "    local source not found, downloading from GitHub"
-    $PluginFiles = @("auto-save.lua", "hardtime.lua", "noice.lua", "surround.lua")
+    $PluginFiles = @("auto-save.lua", "hardtime.lua", "noice.lua", "snacks.lua", "surround.lua")
     foreach ($file in $PluginFiles) {
         Invoke-WebRequest -Uri "$RepoRawBase/nvim/lua/plugins/$file" `
             -OutFile (Join-Path $PluginsDest $file) -UseBasicParsing
