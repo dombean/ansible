@@ -131,6 +131,11 @@ fresh machine. Pick the script for my platform:
 - **nvim-surround** -- add/change/delete surrounding brackets, quotes, tags.
 - **Auto-centring keymaps** -- `zz` after `<C-d>`/`<C-u>`, `n`/`N`, `G`, `*`/`#`.
 - **flash.nvim** -- built into LazyVim, no install needed (`s` to jump).
+- **snacks.nvim projects picker** -- points the projects picker at my dev
+  folders. The path is resolved at runtime (no hardcoded absolute path): set
+  the `NVIM_DEV_DIR` environment variable to override it, otherwise it defaults
+  to `~/Downloads/repos` on Windows, or `~/Documents/dev/repos` and
+  `~/Documents/repos` elsewhere. Missing directories are ignored.
 
 ### Running it
 
