@@ -69,6 +69,9 @@ Install-WingetPackage -Id "BurntSushi.ripgrep.MSVC"  -CommandCheck "rg"
 Install-WingetPackage -Id "sharkdp.fd"               -CommandCheck "fd"
 Install-WingetPackage -Id "junegunn.fzf"             -CommandCheck "fzf"
 Install-WingetPackage -Id "JesseDuffield.lazygit"    -CommandCheck "lazygit"
+# Node.js (npm) for Mason -- LazyVim's LSP installer shells out to npm to fetch
+# many language servers and fails with "Could not find executable npm" without it.
+Install-WingetPackage -Id "OpenJS.NodeJS.LTS"        -CommandCheck "npm"
 # C compiler (gcc) for nvim-treesitter. This is the exact package LazyVim's
 # own health check recommends; WinLibs is a portable MinGW-w64 toolchain that
 # winget exposes on PATH via its Links shim directory, so `gcc` is detected
